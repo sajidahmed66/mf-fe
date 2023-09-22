@@ -9,14 +9,14 @@ import { NavbarNested } from "@/components/NavigationBar/SideNavigationDrawer";
 
 function App() {
   return (
-    <>
+    <div className="flex flex-row">
       <MantineProvider defaultColorScheme="dark">
-        <div>
-          <NavbarNested />
-          <div>this is the part where the render magic will happen</div>
+        <NavbarNested />
+        <div className="mx-auto w-full text-xl text-red-900">
+          this is the part where the render magic will happen
         </div>
       </MantineProvider>
-    </>
+    </div>
   );
 }
 
