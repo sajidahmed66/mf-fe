@@ -1,12 +1,8 @@
 import LoginComponent from "@/components/login/login";
 
-const Login = () => {
+const Login: React.FC = () => {
   return (
-    <div
-      style={{
-        width: "100%",
-      }}
-    >
+    <div className="h-full w-full">
       <LoginComponent />
     </div>
   );
