@@ -28,8 +28,8 @@ If you are developing a production application, we recommend updating the config
 
 todo
 
-   1.  finalize the routing navigation.
+   1.  finalize the routing navigation.(start)
    2.  start with the login page .
    3.  implement protected route.
-   4.  layout impementation on the basic pages
+   4.  layout impementation on the basic pages(done)
    5.  ready mockup for all pages.

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Group, Box, Collapse, ThemeIcon, Text, UnstyledButton, rem } from "@mantine/core";
 import { IconCalendarStats, IconChevronRight } from "@tabler/icons-react";
 import classes from "./NavbarLinksGroup.module.css";
-
+import { useNavigate } from "react-router-dom";
 export interface LinksGroupProps {
   icon: React.FC<any>;
   label: string;
@@ -14,13 +14,17 @@ export interface LinksGroupProps {
 export function LinksGroup({ icon: Icon, label, initiallyOpened, links, link }: LinksGroupProps) {
   const hasLinks = Array.isArray(links);
   const [opened, setOpened] = useState(initiallyOpened || false);
+  const navigate = useNavigate();
   const items = (hasLinks ? links : []).map((link) => (
     <Text<"a">
       component="a"
       className={classes.link}
-      href={link.link}
+      // href={link.link}
       key={link.label}
-      onClick={(event) => event.preventDefault()}
+      onClick={(event) => {
+        event.preventDefault();
+        navigate(link.link);
+      }}
     >
       {link.label}
     </Text>
@@ -29,7 +33,7 @@ export function LinksGroup({ icon: Icon, label, initiallyOpened, links, link }: 
   return (
     <>
       <UnstyledButton
-        onClick={() => (hasLinks && setOpened((o) => !o)) || (link && console.log(link))} // TODO replace console.log with navigation hook
+        onClick={() => (hasLinks && setOpened((o) => !o)) || (link && navigate(link))} // TODO replace console.log with navigation hook
         className={classes.control}
       >
         <Group justify="space-between" gap={0}>

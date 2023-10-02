@@ -4,46 +4,48 @@ import { LinksGroup, LinksGroupProps } from "@/components/NavigationBar/Navbarli
 
 import classes from "@/components/NavigationBar/NavbarNested.module.css";
 
+import routepaths from "@/libs/routepaths";
+//
 const mockdata2: LinksGroupProps[] = [
-  { label: "Dashboard", icon: IconGauge, link: "/" },
+  { label: "Dashboard", icon: IconGauge, link: routepaths.dashboard },
   {
     label: "Trainer",
     icon: IconGauge,
     links: [
-      { label: "list", link: "/" },
-      { label: "add new", link: "/" },
+      { label: "list", link: routepaths.trainer },
+      { label: "add new", link: routepaths.trainer_create },
     ],
   },
   {
     label: "Trainee",
     icon: IconGauge,
     links: [
-      { label: "list", link: "/" },
-      { label: "add new", link: "/" },
+      { label: "list", link: routepaths.trainee },
+      { label: "add new", link: routepaths.trainee_create },
     ],
   },
   {
     label: "Diet",
     icon: IconGauge,
     links: [
-      { label: "list", link: "/" },
-      { label: "crate diet", link: "/" },
-      { label: "request", link: "/" },
+      { label: "list", link: routepaths.diet },
+      { label: "crate diet", link: routepaths.diet_create },
+      { label: "request", link: routepaths.diet_request },
     ],
   },
   {
     label: "Workouts",
     icon: IconGauge,
     links: [
-      { label: "list", link: "/" },
-      { label: "crate Workout", link: "/" },
-      { label: "request", link: "/" },
+      { label: "list", link: routepaths.workout },
+      { label: "crate Workout", link: routepaths.workout_create },
+      { label: "request", link: routepaths.workout_request },
     ],
   },
   {
     label: "Settings",
     icon: IconAdjustmentsHorizontal,
-    links: [{ label: "Profile", link: "/" }],
+    links: [{ label: "Profile", link: routepaths.profile }],
   },
 ];
 

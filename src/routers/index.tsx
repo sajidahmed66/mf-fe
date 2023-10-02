@@ -1,6 +1,30 @@
 import Layout from "@/components/layout/Appshell";
-import Login from "@/pages/login.pages";
 import { createBrowserRouter, createRoutesFromElements, Route, Outlet, redirect } from "react-router-dom";
+//
+import Dashboard from "@/pages/dashboard/index.pages";
+import Login from "@/pages/login.pages";
+//
+import TrainerList from "@/pages/trainer/list.pages";
+import TrainerDetails from "@/pages/trainer/details.pages";
+import TrainerCreation from "@/pages/trainer/new.pages";
+//
+import TraineeList from "@/pages/trainee/list.pages";
+import TraineeCreation from "@/pages/trainee/new.pages";
+import Traineedetails from "@/pages/trainee/details.pages";
+//
+import DietList from "@/pages/diet/list.pages";
+import DietCreate from "@/pages/diet/new.pages";
+import DietPlanRequests from "@/pages/diet/requested-plan.pages";
+//
+import WorkoutList from "@/pages/workout/list.pages";
+import CreateWorkout from "@/pages/workout/new.pages";
+import WorkoutPlanRequests from "@/pages/workout/reqiested-plans";
+//
+import Profile from "@/pages/profile/me.pages";
+import ProfileUpdate from "@/pages/profile/edit.pages";
+//
+import NotFound from "@/pages/not-found/index.pages";
+//
 
 const RootElement = () => (
   <Layout>
@@ -13,47 +37,38 @@ const router = createBrowserRouter(
     <Route>
       <Route path="/" element={<RootElement />}>
         <Route index loader={() => redirect("/dashboard")} />
-        <Route path="dashboard" element={<div>Dashboard</div>} />
+        <Route path="dashboard" element={<Dashboard />} />
         <Route path="trainer">
-          <Route index element={<div>Trainer</div>} />
-          <Route path="add-new" element={<div>Add new</div>} />
-          <Route path=":id" element={<div>Trainer details</div>} />
+          <Route index element={<TrainerList />} />
+          <Route path="add-new" element={<TrainerCreation />} />
+          <Route path=":id" element={<TrainerDetails />} />
         </Route>
         <Route path="trainee">
-          <Route index element={<div>Trainee</div>} />
-          <Route path="add-new" element={<div>Add new</div>} />
-          <Route path=":id" element={<div>Trainee details</div>} />
+          <Route index element={<TraineeList />} />
+          <Route path="add-new" element={<TraineeCreation />} />
+          <Route path=":id" element={<Traineedetails />} />
         </Route>
         <Route path="diet">
-          <Route index element={<div>Diet</div>} />
-          <Route path="create-diet" element={<div>create diet</div>} />
-          <Route path="requested-plan" element={<div>Diet plan request</div>} />
+          <Route index element={<DietList />} />
+          <Route path="create-diet" element={<DietCreate />} />
+          <Route path="requested-plan" element={<DietPlanRequests />} />
           {/* todo add more if nessary */}
         </Route>
         <Route path="workout">
-          <Route index element={<div>work out lists</div>} />
-          <Route path="create-workout" element={<div>create workout</div>} />
-          <Route
-            path="requested-plan"
-            element={
-              <div>
-                <li>assign from a plan</li>
-                <li>create and assign plan</li>
-                <li>update existing plan</li>{" "}
-              </div>
-            }
-          />
+          <Route index element={<WorkoutList />} />
+          <Route path="create-workout" element={<CreateWorkout />} />
+          <Route path="requested-plan" element={<WorkoutPlanRequests />} />
           {/* todo add more if nessary */}
         </Route>
         <Route path="profile">
-          <Route index element={<div>Profile</div>} />
-          <Route path="edit-profile" element={<div>Edit profile</div>} />
+          <Route index element={<Profile />} />
+          <Route path="edit-profile" element={<ProfileUpdate />} />
         </Route>
       </Route>
       <Route path="/login">
         <Route index element={<Login />} />
       </Route>
-      <Route path="*" element={<div>Not Found</div>} />
+      <Route path="*" element={<NotFound />} />
     </Route>,
   ),
 );
