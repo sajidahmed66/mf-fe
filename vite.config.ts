@@ -1,5 +1,5 @@
 import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
+import react from "@vitejs/plugin-react-swc";
 import svgrPlugin from "vite-plugin-svgr";
 import tsconfigPaths from "vite-tsconfig-paths";
 // https://vitejs.dev/config/
@@ -12,9 +12,7 @@ export default defineConfig({
     }),
     ,
     tsconfigPaths(),
-    react({
-      exclude: ["**/node_modules/**", "**/vite.config.ts"],
-      include: ["./vite.config.ts", "src/**/*.tsx", "src/**/*.ts", "src/**/*.jsx", "src/**/*.js"],
-    }),
+    react(),
   ],
+  server: { port: 3000 },
 });
