@@ -3,6 +3,7 @@ import { AppShell, Burger, Group } from "@mantine/core";
 import React, { FC } from "react";
 import Logo from "src/assets/svg/logo.svg?react";
 import { NavbarNested } from "@/components/NavigationBar/SideNavigationDrawer";
+import Container from "@/components/common/ui/Container";
 
 interface ILayoutProps {
   children?: React.ReactNode;
@@ -27,8 +28,7 @@ const Layout: FC<ILayoutProps> = ({ children }) => {
         <NavbarNested />
       </AppShell.Navbar>
       <AppShell.Main>
-        {/* outlet will be here  */}
-        {children}
+        <Container>{children}</Container>
       </AppShell.Main>
     </AppShell>
   );
