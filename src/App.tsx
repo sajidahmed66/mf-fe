@@ -3,16 +3,15 @@
 // All packages except `@mantine/hooks` require styles imports
 import "@mantine/core/styles.css";
 import { MantineProvider } from "@mantine/core";
-import Layout from "@/components/layout/Appshell";
+import { RouterProvider } from "react-router-dom";
+import router from "@/routers";
 
 // routes related imports
 
 function App() {
   return (
     <MantineProvider defaultColorScheme="dark">
-      <Layout>
-        <></>
-      </Layout>
+      <RouterProvider router={router} />
     </MantineProvider>
   );
 }

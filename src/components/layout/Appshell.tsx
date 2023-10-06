@@ -3,11 +3,14 @@ import { AppShell, Burger, Group } from "@mantine/core";
 import React, { FC } from "react";
 import Logo from "src/assets/svg/logo.svg?react";
 import { NavbarNested } from "@/components/NavigationBar/SideNavigationDrawer";
+import Container from "@/components/common/ui/Container";
+
 interface ILayoutProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
+
 const Layout: FC<ILayoutProps> = ({ children }) => {
-  const [opened, { toggle }] = useDisclosure(); // special hook that takes care of this nuisence
+  const [opened, { toggle }] = useDisclosure();
 
   return (
     <AppShell
@@ -22,19 +25,10 @@ const Layout: FC<ILayoutProps> = ({ children }) => {
         </Group>
       </AppShell.Header>
       <AppShell.Navbar h="100%">
-        {/* this part is a skeleton
-        {Array(15)
-          .fill(0)
-          .map((_, index) => (
-            <Skeleton key={index} h={28} mt="sm" animate={false} />
-          ))}
-
-           */}
         <NavbarNested />
       </AppShell.Navbar>
       <AppShell.Main>
-        {/* outlet will be here  */}
-        {children}
+        <Container>{children}</Container>
       </AppShell.Main>
     </AppShell>
   );

@@ -16,6 +16,7 @@
   font-weight: 500;
   display: block;
   text-decoration: none;
+  text-transform: capitalize;
   padding: var(--mantine-spacing-xs) var(--mantine-spacing-md);
   padding-left: var(--mantine-spacing-md);
   margin-left: var(--mantine-spacing-xl);
