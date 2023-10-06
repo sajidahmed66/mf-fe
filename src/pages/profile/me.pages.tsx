@@ -1,6 +1,7 @@
-import React from "react";
+import { FC } from "react";
 
-const Profile = () => {
+
+const Profile:FC  = () => {
   return <div>Profile</div>;
 };
 

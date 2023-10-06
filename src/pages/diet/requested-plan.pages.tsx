@@ -1,8 +1,9 @@
 import BreadCrumb from "@/components/breadcrumb/BreadCrumb";
 import routepaths from "@/libs/routepaths";
-import React from "react";
+import { FC } from "react";
 
-const DietPlanRequests = () => {
+
+const DietPlanRequests:FC  = () => {
   const dietReqPageBreadcrumb = [
     {
       label: "Dashboard",

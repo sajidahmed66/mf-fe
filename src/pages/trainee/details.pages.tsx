@@ -1,6 +1,7 @@
 import BreadCrumb from "@/components/breadcrumb/BreadCrumb";
 import routepaths from "@/libs/routepaths";
-import React from "react";
+import { FC } from "react";
+
 
 
 const traineeDetailPageBreadcrumb = [
@@ -16,7 +17,7 @@ const traineeDetailPageBreadcrumb = [
     label: "Details",
   },
 ];
-const Traineedetails = () => {
+const Traineedetails:FC  = () => {
   return <div>
     <BreadCrumb items={traineeDetailPageBreadcrumb} />
     Traineedetails</div>;

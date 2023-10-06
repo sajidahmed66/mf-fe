@@ -1,7 +1,7 @@
 import BreadCrumb from "@/components/breadcrumb/BreadCrumb";
-import React from "react";
+import { FC } from "react";
 
-const Dashboard = () => {
+const Dashboard: FC = () => {
   return (
     <div>
       <BreadCrumb

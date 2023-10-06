@@ -1,6 +1,6 @@
 import BreadCrumb from "@/components/breadcrumb/BreadCrumb";
 import routepaths from "@/libs/routepaths";
-import React from "react";
+import { FC } from "react";
 
 const dietcreatePagebreadcrumb = [
   {
@@ -15,7 +15,7 @@ const dietcreatePagebreadcrumb = [
     label: "Add New",
   },
 ];
-const DietCreate = () => {
+const DietCreate: FC = () => {
   return (
     <div>
       <BreadCrumb items={dietcreatePagebreadcrumb} />

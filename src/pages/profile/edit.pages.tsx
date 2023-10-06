@@ -1,6 +1,7 @@
-import React from "react";
+import { FC } from "react";
 
-const ProfileUpdate = () => {
+
+const ProfileUpdate:FC  = () => {
   return <div>ProfileUpdate</div>;
 };
 

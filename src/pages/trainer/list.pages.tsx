@@ -1,6 +1,6 @@
 import BreadCrumb from "@/components/breadcrumb/BreadCrumb";
 import routepaths from "@/libs/routepaths";
-import React from "react";
+import { FC } from "react";
 
 const trainerListPageBreadcrumb = [
   {
@@ -13,7 +13,7 @@ const trainerListPageBreadcrumb = [
   },
 ];
 
-const TrainerList = () => {
+const TrainerList: FC = () => {
   return (
     <div>
       <BreadCrumb items={trainerListPageBreadcrumb} />
