@@ -12,17 +12,15 @@ type BreadCrumbProps = {
 };
 
 const BreadCrumb: React.FC<BreadCrumbProps> = ({ items }) => {
-  const breadcumbitem = items.map((item) => {
-    return (
-      <>
-        <Breadcrumbs separator="→" mt="xs">
-          {item.link ? <Link to={item.link}>{item.label}</Link> : item.label}
-        </Breadcrumbs>
-      </>
-    );
+  const breadcumbitem = items.map((item, i) => {
+    return <div key={i}>{item.link ? <Link to={item.link}>{item.label}</Link> : item.label}</div>;
   });
 
-  return <>{breadcumbitem}</>;
+  return (
+    <Breadcrumbs separator="→" mt="xs">
+      {breadcumbitem}
+    </Breadcrumbs>
+  );
 };
 
 export default BreadCrumb;
