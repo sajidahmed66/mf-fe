@@ -1,5 +1,5 @@
 import Layout from "@/components/layout/Appshell";
-import { createBrowserRouter, createRoutesFromElements, Route, Outlet, redirect } from "react-router-dom";
+import { createBrowserRouter, createRoutesFromElements, Route, redirect } from "react-router-dom";
 //
 import Dashboard from "@/pages/dashboard/index.pages";
 import Login from "@/pages/login.pages";
@@ -25,12 +25,7 @@ import ProfileUpdate from "@/pages/profile/edit.pages";
 //
 import NotFound from "@/pages/not-found/index.pages";
 //
-
-const RootElement = () => (
-  <Layout>
-    <Outlet />
-  </Layout>
-);
+import RootElement from "@/components/layout/RootElement";
 
 const router = createBrowserRouter(
   createRoutesFromElements(

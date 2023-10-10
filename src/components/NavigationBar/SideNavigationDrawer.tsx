@@ -5,6 +5,7 @@ import { LinksGroup, LinksGroupProps } from "@/components/NavigationBar/Navbarli
 import classes from "@/components/NavigationBar/NavbarNested.module.css";
 
 import routepaths from "@/libs/routepaths";
+import { UserButton } from "@/components/common/buttons/UserButtons/UserButton";
 //
 const mockdata2: LinksGroupProps[] = [
   { label: "Dashboard", icon: IconGauge, link: routepaths.dashboard },
@@ -57,7 +58,9 @@ export function NavbarNested() {
       <ScrollArea className={classes.links}>
         <div className={classes.linksInner}>{links}</div>
       </ScrollArea>
-      <div className={classes.footer}>{/* <UserButton /> */}</div>
+      <div className={classes.footer}>
+        <UserButton />
+      </div>
     </nav>
   );
 }
