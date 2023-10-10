@@ -1,6 +1,8 @@
 import { UnstyledButton, Group, Avatar, Text, rem } from "@mantine/core";
 import { IconChevronRight } from "@tabler/icons-react";
 import classes from "./UserButton.module.css";
+import { userLoggedOut } from "@/features/auth/authSlice";
+import { signOut } from "@/libs/utils/auth/auth";
 // import { isAuthenticated, userInfo } from "@/libs/utils/auth/auth";
 
 export function UserButton() {
@@ -13,6 +15,8 @@ export function UserButton() {
       className={classes.user}
       onClick={() => {
         console.log("userclicked");
+
+        signOut(userLoggedOut);
       }}
     >
       <Group>

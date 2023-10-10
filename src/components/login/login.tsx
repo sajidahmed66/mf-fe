@@ -2,9 +2,8 @@ import { FC } from "react";
 import { TextInput, Checkbox, Button, Group, Box } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { validatePassword, validatePhoneNumber } from "@/libs/validators";
-import { axiosInstance } from "@/libs/utils/axiosInstance";
-import { authenticate } from "@/libs/utils/auth/auth";
 import { useNavigate } from "react-router-dom";
+import { useLoginMutation } from "@/features/auth/authApi";
 type loginTypes = {
   phone: string;
   password: string;
@@ -13,6 +12,7 @@ type loginTypes = {
 
 const LoginComponent: FC = () => {
   const naviagte = useNavigate();
+  const [login] = useLoginMutation();
   const form = useForm({
     initialValues: {
       phone: "",
@@ -28,17 +28,11 @@ const LoginComponent: FC = () => {
   });
 
   const handleSubmit = async (values: loginTypes) => {
-    console.log(values);
-    const getloginToken = (data: loginTypes) => {
-      return axiosInstance.post("admin/auth", {
-        phone: data.phone,
-        password: data.password,
-      });
-    };
     try {
-      let token = await getloginToken(values);
-      console.log(token.data.token);
-      authenticate(token.data.token, () => naviagte("/dashboard"));
+      login({
+        phone: values.phone,
+        password: values.password,
+      });
     } catch (error) {
       console.log({ error });
     }
