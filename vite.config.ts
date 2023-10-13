@@ -14,5 +14,5 @@ export default defineConfig({
     tsconfigPaths(),
     react(),
   ],
-  server: { port: 3000 },
+  server: { port: 3050 },
 });
