@@ -78,7 +78,7 @@ const LoginComponent: FC = () => {
           {...form.getInputProps("termsOfService", { type: "checkbox" })}
         />
         <Group justify="flex-end" mt="md">
-          <Button type="submit">Login</Button>
+          {isLoading ? <Button loading>Logging in ... </Button> : <Button type="submit">Login</Button>}
         </Group>
       </form>
     </Box>
