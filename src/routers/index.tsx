@@ -1,4 +1,3 @@
-import Layout from "@/components/layout/Appshell";
 import { createBrowserRouter, createRoutesFromElements, Route, redirect } from "react-router-dom";
 //
 import Dashboard from "@/pages/dashboard/index.pages";

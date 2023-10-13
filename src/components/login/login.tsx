@@ -1,9 +1,11 @@
-import { FC } from "react";
-import { TextInput, Checkbox, Button, Group, Box } from "@mantine/core";
+import { FC, useCallback, useEffect, useState } from "react";
+import { TextInput, Checkbox, Button, Group, Box, Alert } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { validatePassword, validatePhoneNumber } from "@/libs/validators";
 import { useNavigate } from "react-router-dom";
 import { useLoginMutation } from "@/features/auth/authApi";
+import { IconAlertTriangle } from "@tabler/icons-react";
+
 type loginTypes = {
   phone: string;
   password: string;
@@ -11,8 +13,10 @@ type loginTypes = {
 };
 
 const LoginComponent: FC = () => {
-  const naviagte = useNavigate();
-  const [login] = useLoginMutation();
+  const [error, setError] = useState<string | null>(null);
+  const [login, { data, error: responseError, isLoading }] = useLoginMutation();
+  const navigate = useNavigate();
+  const iconError = <IconAlertTriangle size={16} />;
   const form = useForm({
     initialValues: {
       phone: "",
@@ -27,7 +31,7 @@ const LoginComponent: FC = () => {
     },
   });
 
-  const handleSubmit = async (values: loginTypes) => {
+  const handleSubmit = useCallback((values: loginTypes) => {
     try {
       login({
         phone: values.phone,
@@ -36,10 +40,29 @@ const LoginComponent: FC = () => {
     } catch (error) {
       console.log({ error });
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    if (responseError) {
+      if ("status" in responseError) {
+        const errorMessage =
+          "error" in responseError ? responseError.error : JSON.stringify(responseError.data);
+        setError(errorMessage);
+      }
+    }
+    if (data?.token) {
+      navigate("/dashboard");
+    }
+  }, [data, responseError]);
 
   return (
     <Box className="w-full max-w-sm m-auto">
+      {/* TODO need to do error handeling for wrong credentials */}
+      {error && (
+        <Alert variant="light" color="red" title="Error" icon={iconError}>
+          {error}
+        </Alert>
+      )}
       <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
         <TextInput
           type="number"

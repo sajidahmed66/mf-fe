@@ -1,7 +1,6 @@
 import apiSlice from "@/features/api/apiSlice";
 import { userLoggedIn } from "@/features/auth/authSlice";
 import { authenticate } from "@/libs/utils/auth/auth";
-
 export const authApi = apiSlice.injectEndpoints({
   // endpoints here
   endpoints: (builder) => ({
@@ -17,7 +16,7 @@ export const authApi = apiSlice.injectEndpoints({
           console.log({ result });
           //   result.data.token
           authenticate(result.data.token, () => {
-            dispatch(userLoggedIn);
+            dispatch(userLoggedIn({ accessToken: result.data.token }));
           });
         } catch (error) {
           console.log(error);

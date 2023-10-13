@@ -3,20 +3,18 @@ import { IconChevronRight } from "@tabler/icons-react";
 import classes from "./UserButton.module.css";
 import { userLoggedOut } from "@/features/auth/authSlice";
 import { signOut } from "@/libs/utils/auth/auth";
+import { useAppDispatch } from "@/app/hooks";
 // import { isAuthenticated, userInfo } from "@/libs/utils/auth/auth";
 
 export function UserButton() {
-  // TODO need to implement a hook to get useringo from token
-  // const getUserInfo = () => {
-  //   return userInfo() && userInfo();
+  const dispatch = useAppDispatch();
+  // TODO need to implement a hook to get userinfo from token or call an api or something
   // };
   return (
     <UnstyledButton
       className={classes.user}
       onClick={() => {
-        console.log("userclicked");
-
-        signOut(userLoggedOut);
+        signOut(() => dispatch(userLoggedOut()));
       }}
     >
       <Group>
@@ -28,11 +26,11 @@ export function UserButton() {
 
         <div style={{ flex: 1 }}>
           <Text size="sm" fw={500}>
-            Harriette Spoonlicker
+            user name
           </Text>
 
           <Text c="dimmed" size="xs">
-            hspoonlicker@outlook.com
+            user email
           </Text>
         </div>
 
