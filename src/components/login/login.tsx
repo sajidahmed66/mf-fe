@@ -1,46 +1,87 @@
-import { FC } from "react";
-import { TextInput, Checkbox, Button, Group, Box } from "@mantine/core";
+import { FC, useCallback, useEffect, useState } from "react";
+import { TextInput, Checkbox, Button, Group, Box, Alert } from "@mantine/core";
 import { useForm } from "@mantine/form";
+import { validatePassword, validatePhoneNumber } from "@/libs/validators";
+import { useNavigate } from "react-router-dom";
+import { useLoginMutation } from "@/features/auth/authApi";
+import { IconAlertTriangle } from "@tabler/icons-react";
 
-const LoginComponent: FC = ({}) => {
+type loginTypes = {
+  phone: string;
+  password: string;
+  termsOfService: boolean;
+};
+
+const LoginComponent: FC = () => {
+  const [error, setError] = useState<string | null>(null);
+  const [login, { data, error: responseError, isLoading }] = useLoginMutation();
+  const navigate = useNavigate();
+  const iconError = <IconAlertTriangle size={16} />;
   const form = useForm({
     initialValues: {
-      email: "",
+      phone: "",
       password: "",
       termsOfService: false,
     },
 
     validate: {
-      email: (value) => (/^\S+@\S+$/.test(value) ? null : "Invalid email"),
+      phone: (value) => (validatePhoneNumber(`+88${value}`) ? null : "invalid phone number"),
+      password: (value) => (validatePassword(value) ? null : "Password must be at least 6 characters"),
+      termsOfService: (value) => (value ? null : "You must accept T&Cs"),
     },
   });
+
+  const handleSubmit = useCallback((values: loginTypes) => {
+    try {
+      login({
+        phone: values.phone,
+        password: values.password,
+      });
+    } catch (error) {
+      console.log({ error });
+    }
+  }, []);
+
+  useEffect(() => {
+    if (responseError) {
+      if ("status" in responseError) {
+        const errorMessage =
+          "error" in responseError ? responseError.error : JSON.stringify(responseError.data);
+        setError(errorMessage);
+      }
+    }
+    if (data?.token) {
+      navigate("/dashboard");
+    }
+  }, [data, responseError]);
+
   return (
-    <>
-      <Box maw={340} mx="auto">
-        <form onSubmit={form.onSubmit((values) => console.log(values))}>
-          <TextInput
-            withAsterisk
-            label="Email"
-            placeholder="your@email.com"
-            {...form.getInputProps("email")}
-          />
-          <TextInput
-            withAsterisk
-            label="Password"
-            hidden
-            {...form.getInputProps("password")}
-          />
-          <Checkbox
-            mt="md"
-            label="I agree to terms and conditions"
-            {...form.getInputProps("termsOfService", { type: "checkbox" })}
-          />
-          <Group justify="flex-end" mt="md">
-            <Button type="submit">Submit</Button>
-          </Group>
-        </form>
-      </Box>
-    </>
+    <Box className="w-full max-w-sm m-auto">
+      {/* TODO need to do error handeling for wrong credentials */}
+      {error && (
+        <Alert variant="light" color="red" title="Error" icon={iconError}>
+          {error}
+        </Alert>
+      )}
+      <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
+        <TextInput
+          type="number"
+          withAsterisk
+          label="Phone"
+          placeholder="01**********"
+          {...form.getInputProps("phone")}
+        />
+        <TextInput withAsterisk label="Password" hidden {...form.getInputProps("password")} />
+        <Checkbox
+          mt="md"
+          label="I agree to terms and conditions"
+          {...form.getInputProps("termsOfService", { type: "checkbox" })}
+        />
+        <Group justify="flex-end" mt="md">
+          <Button type="submit">Login</Button>
+        </Group>
+      </form>
+    </Box>
   );
 };
 

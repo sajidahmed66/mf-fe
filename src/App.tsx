@@ -5,14 +5,18 @@ import "@mantine/core/styles.css";
 import { MantineProvider } from "@mantine/core";
 import { RouterProvider } from "react-router-dom";
 import router from "@/routers";
-
+//redux
+import { Provider } from "react-redux";
+import { store } from "@/app/store";
 // routes related imports
 
 function App() {
   return (
-    <MantineProvider defaultColorScheme="dark">
-      <RouterProvider router={router} />
-    </MantineProvider>
+    <Provider store={store}>
+      <MantineProvider defaultColorScheme="dark">
+        <RouterProvider router={router} />
+      </MantineProvider>
+    </Provider>
   );
 }
 

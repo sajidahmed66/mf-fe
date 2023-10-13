@@ -24,7 +24,7 @@ const Layout: FC<ILayoutProps> = ({ children }) => {
           <Logo className="w-32 h-12 md:w-34 fill-white md:ml-8 md:h-16" />
         </Group>
       </AppShell.Header>
-      <AppShell.Navbar h="100%">
+      <AppShell.Navbar>
         <NavbarNested />
       </AppShell.Navbar>
       <AppShell.Main>
