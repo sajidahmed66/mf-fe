@@ -1,5 +1,7 @@
+import TraineeForm from "@/components/trainee/TraineeForm";
+
 const AddTrainee = () => {
-  return <div>AddTrainee</div>;
+  return <div><TraineeForm /></div>;
 };
 
 export default AddTrainee;
