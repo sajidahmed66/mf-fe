@@ -38,7 +38,7 @@ const TraineeForm: React.FC<ITraineeForm> = ({ initialValues }) => {
     }
   }, [initialValues, createTraineeForm])
   return (
-    <Box mx='auto' maw={320} >
+    <Box mx='auto' miw={320} >
       <Fieldset legend="Member information">
         <TextInput label="First Name" placeholder="First Name" {...createTraineeForm.getInputProps('firstName')} />
         <TextInput label="Last Name" placeholder="Last Name" {...createTraineeForm.getInputProps('lastName')} />
@@ -63,7 +63,7 @@ const TraineeForm: React.FC<ITraineeForm> = ({ initialValues }) => {
         <NumberInput label="Total Amount" allowNegative={false} allowDecimal={false} placeholder="Registration fee" min={0} {...createTraineeForm.getInputProps("totalAmount")} />
         <NumberInput label="Paid Amount" allowNegative={false} allowDecimal={false} placeholder="Registration fee" min={0} {...createTraineeForm.getInputProps("paidAmount")} />
       </Fieldset>
-      <Button variant="filled" onClick={() => handleSubmit()} >
+      <Button className="mt-4" variant="filled" onClick={() => handleSubmit()} >
         Create New Member
       </Button>
     </Box>

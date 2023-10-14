@@ -1,4 +1,5 @@
 import BreadCrumb from "@/components/breadcrumb/BreadCrumb";
+import AddTrainee from "@/components/trainee/AddTrainee";
 import routepaths from "@/libs/routepaths";
 
 const traineeCreationPageBreadcrumb = [
@@ -19,7 +20,7 @@ const TraineeCreation = () => {
   return (
     <div>
       <BreadCrumb items={traineeCreationPageBreadcrumb} />
-      TraineeCreation
+      <AddTrainee />
     </div>
   );
 };
