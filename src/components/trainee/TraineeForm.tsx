@@ -1,7 +1,7 @@
 import React, { useLayoutEffect } from "react";
 import { useForm } from "@mantine/form";
 import { Box, NumberInput, TextInput, Fieldset, Radio, Group, Button } from "@mantine/core";
-interface ICreateTraineeForm {
+interface ICreateTraineeFormValues {
   firstName: string;
   lastName: string;
   mobileNumber: string;
@@ -13,11 +13,11 @@ interface ICreateTraineeForm {
 }
 
 interface ITraineeForm {
-  initialValues?: ICreateTraineeForm | undefined
+  initialValues?: ICreateTraineeFormValues | undefined
 }
 
 const TraineeForm: React.FC<ITraineeForm> = ({ initialValues }) => {
-  const createTraineeForm = useForm<ICreateTraineeForm>({
+  const createTraineeForm = useForm<ICreateTraineeFormValues>({
     initialValues: {
       firstName: '',
       lastName: '',
