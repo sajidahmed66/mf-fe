@@ -1,0 +1,58 @@
+import { faker } from '@faker-js/faker';
+
+export const dummyTraineeData = [{
+    firstName: faker.person.firstName(),
+    lastName: faker.person.lastName(),
+    phone: faker.phone.number(),
+    createAt: faker.date.past()
+}, {
+    firstName: faker.person.firstName(),
+    lastName: faker.person.lastName(),
+    phone: faker.phone.number(),
+    createAt: faker.date.past()
+}, {
+    firstName: faker.person.firstName(),
+    lastName: faker.person.lastName(),
+    phone: faker.phone.number(),
+    createAt: faker.date.past()
+}, {
+    firstName: faker.person.firstName(),
+    lastName: faker.person.lastName(),
+    phone: faker.phone.number(),
+    createAt: faker.date.past()
+}, {
+    firstName: faker.person.firstName(),
+    lastName: faker.person.lastName(),
+    phone: faker.phone.number(),
+    createAt: faker.date.past()
+}, {
+    firstName: faker.person.firstName(),
+    lastName: faker.person.lastName(),
+    phone: faker.phone.number(),
+    createAt: faker.date.past()
+}, {
+    firstName: faker.person.firstName(),
+    lastName: faker.person.lastName(),
+    phone: faker.phone.number(),
+    createAt: faker.date.past()
+}, {
+    firstName: faker.person.firstName(),
+    lastName: faker.person.lastName(),
+    phone: faker.phone.number(),
+    createAt: faker.date.past()
+}, {
+    firstName: faker.person.firstName(),
+    lastName: faker.person.lastName(),
+    phone: faker.phone.number(),
+    createAt: faker.date.past()
+}, {
+    firstName: faker.person.firstName(),
+    lastName: faker.person.lastName(),
+    phone: faker.phone.number(),
+    createAt: faker.date.past()
+}, {
+    firstName: faker.person.firstName(),
+    lastName: faker.person.lastName(),
+    phone: faker.phone.number(),
+    createAt: faker.date.past()
+},]
