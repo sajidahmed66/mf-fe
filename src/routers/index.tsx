@@ -20,7 +20,7 @@ import CreateWorkout from "@/pages/workout/new.pages";
 import WorkoutPlanRequests from "@/pages/workout/reqiested-plans";
 //
 import Profile from "@/pages/profile/me.pages";
-import ProfileUpdate from "@/pages/profile/edit.pages";
+import ProfileEdit from "@/pages/profile/edit.pages";
 //
 import NotFound from "@/pages/not-found/index.pages";
 //
@@ -56,7 +56,7 @@ const router = createBrowserRouter(
         </Route>
         <Route path="profile">
           <Route index element={<Profile />} />
-          <Route path="edit-profile" element={<ProfileUpdate />} />
+          <Route path="edit-profile" element={<ProfileEdit />} />
         </Route>
       </Route>
       <Route path="/login">

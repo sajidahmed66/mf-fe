@@ -30,8 +30,8 @@ const ProfileBody = () => {
                             <span className="text-inherit">New York, US</span>
                         </li>
                         <li className="flex border-b py-2">
-                            <span className="font-bold w-24">Languages:</span>
-                            <span className="text-inherit">English, Spanish</span>
+                            <span className="font-bold w-24">Role:</span>
+                            <span className="text-inherit">Admin</span>
                         </li>
 
 
