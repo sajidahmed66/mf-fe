@@ -2,12 +2,14 @@ import React, { useLayoutEffect } from "react";
 import { useForm } from "@mantine/form";
 import { Box, NumberInput, TextInput, Fieldset, Radio, Group, Button } from "@mantine/core";
 import { validateName } from "@/libs/validators";
+import { IPackageData } from "@/libs/types";
 interface ICreateTraineeFormValues {
   firstName: string;
   lastName: string;
   mobileNumber: string;
   registrationFee: number;
   subscriptionType: string;
+  subscriptionPackageID?: string;
   monthlyFee: number;
   totalAmount: number;
   paidAmount: number;
@@ -15,9 +17,10 @@ interface ICreateTraineeFormValues {
 
 interface ITraineeForm {
   initialValues?: ICreateTraineeFormValues | undefined
+  packageList?: IPackageData[]
 }
 
-const TraineeForm: React.FC<ITraineeForm> = ({ initialValues }) => {
+const TraineeForm: React.FC<ITraineeForm> = ({ initialValues, packageList }) => {
   const createTraineeForm = useForm<ICreateTraineeFormValues>({
     initialValues: {
       firstName: '',
@@ -27,7 +30,8 @@ const TraineeForm: React.FC<ITraineeForm> = ({ initialValues }) => {
       registrationFee: 0,
       paidAmount: 0,
       subscriptionType: '',
-      totalAmount: 0
+      totalAmount: 0,
+      subscriptionPackageID: ''
     },
 
     validate: {
@@ -36,13 +40,27 @@ const TraineeForm: React.FC<ITraineeForm> = ({ initialValues }) => {
   });
 
   const handleSubmit = createTraineeForm.onSubmit(values => console.log(values));
-
+  console.log(createTraineeForm.values.subscriptionType)
   useLayoutEffect(() => {
     if (initialValues) {
       createTraineeForm.setValues(initialValues)
       createTraineeForm.resetDirty(initialValues) // iTODO  do not know what it does need to figure out before i ship
     }
   }, [initialValues, createTraineeForm]);
+
+  const renderPackagelist = (packageList: IPackageData[],) => {
+    const availablePackagelist = <Radio.Group
+      label="select a package type"
+      withAsterisk
+      {...createTraineeForm.getInputProps("subscriptionType")}>
+      <Group mt="xs">
+        {packageList.map(p => (
+          <Radio value={p._id} label={p.name} />
+        ))}
+      </Group>
+    </Radio.Group>
+    return availablePackagelist
+  }
 
   return (
     <Box mx='auto' miw={300} className="sm:space-y-4 md:space-y-6" >
@@ -55,7 +73,6 @@ const TraineeForm: React.FC<ITraineeForm> = ({ initialValues }) => {
       <Fieldset legend="Registration details" >
         <NumberInput label="Registration Fee" allowNegative={false} allowDecimal={false} placeholder="Registration fee" min={0} {...createTraineeForm.getInputProps("registrationFee")} />
         <Radio.Group
-          name="favoriteFramework"
           label="Choose Subscription type"
           withAsterisk
           {...createTraineeForm.getInputProps("subscriptionType")}
@@ -65,6 +82,7 @@ const TraineeForm: React.FC<ITraineeForm> = ({ initialValues }) => {
             <Radio value="package" label="Package" />
           </Group>
         </Radio.Group>
+        {packageList && createTraineeForm.values.subscriptionType === "package" ? renderPackagelist(packageList) : null}
       </Fieldset>
 
       <Fieldset legend="Payment Details" >

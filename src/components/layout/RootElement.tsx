@@ -7,7 +7,8 @@ import { Outlet, useNavigate } from "react-router-dom";
 const RootElement = () => {
   const navigate = useNavigate();
   const token = useAppSelector((state) => state.auth.accessToken);
-
+  console.log("root element" , token)
+  
   useEffect(() => {
     if (token === undefined && isAuthenticated() === false) {
       navigate("/login");
