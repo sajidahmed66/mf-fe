@@ -25,6 +25,7 @@ import ProfileEdit from "@/pages/profile/edit.pages";
 import NotFound from "@/pages/not-found/index.pages";
 //
 import RootElement from "@/components/layout/RootElement";
+import PackageListPage from "@/pages/pakages/list.page";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -57,6 +58,9 @@ const router = createBrowserRouter(
         <Route path="profile">
           <Route index element={<Profile />} />
           <Route path="edit-profile" element={<ProfileEdit />} />
+        </Route>
+        <Route path="packages">
+          <Route index element={<PackageListPage />} />
         </Route>
       </Route>
       <Route path="/login">
