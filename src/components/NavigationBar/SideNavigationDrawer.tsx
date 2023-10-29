@@ -44,6 +44,16 @@ const mockdata2: LinksGroupProps[] = [
     ],
   },
   {
+    label: "Payment & Subscription",
+    icon: IconGauge,
+    links: [
+      {
+        label: "Packages",
+        link: routepaths.packages_list,
+      },
+    ],
+  },
+  {
     label: "Settings",
     icon: IconAdjustmentsHorizontal,
     links: [{ label: "Profile", link: routepaths.profile }],

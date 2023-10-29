@@ -3,7 +3,7 @@ import apiSlice from "@/features/api/apiSlice";
 const traineeAPI = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getTraineeList: builder.query({
-      query: (arg) => ({
+      query: () => ({
         url: "/admin/trainees",
         method: "GET",
       }),
@@ -11,3 +11,5 @@ const traineeAPI = apiSlice.injectEndpoints({
     }),
   }),
 });
+
+export const { useGetTraineeListQuery } = traineeAPI;

@@ -18,6 +18,8 @@ export default {
   workout: "/workout",
   workout_create: "/workout/create-workout",
   workout_request: "/workout/requested-plan",
+  // payment and packages
+  packages_list: "/packages",
   //
   profile: "/profile",
   profile_edit: "/profile/edit-profile",

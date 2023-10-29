@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 export interface IauthState {
   accessToken: string | undefined;
@@ -8,15 +8,13 @@ export interface IauthState {
 
 const initialState: IauthState = {
   accessToken: undefined,
-  // userId: undefined,
-  // userRole: undefined,
 };
 
 const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    userLoggedIn: (state, action) => {
+    userLoggedIn: (state, action: PayloadAction<{ accessToken: string }>) => {
       state.accessToken = action.payload.accessToken;
     },
     userLoggedOut: (state) => {

@@ -10,9 +10,8 @@ import { Provider } from "react-redux";
 import { store } from "@/app/store";
 // routes related imports
 
-
 // css
-import '@mantine/dates/styles.css';
+import "@mantine/dates/styles.css";
 function App() {
   return (
     <Provider store={store}>
