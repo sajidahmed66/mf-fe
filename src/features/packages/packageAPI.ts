@@ -1,9 +1,9 @@
 import apiSlice from "@/features/api/apiSlice";
-import { PackageData } from "vite";
+import { IPackageData } from "@/libs/types";
 
 const packageAPI = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getPackages: builder.query<PackageData[], void>({
+    getPackages: builder.query<IPackageData[], void>({
       query: () => ({ url: "admin/packages", method: "GET" }),
     }),
 

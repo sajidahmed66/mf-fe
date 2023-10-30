@@ -1,13 +1,13 @@
 import { ScrollArea } from "@mantine/core";
 import { IconGauge, IconAdjustmentsHorizontal } from "@tabler/icons-react";
-import { LinksGroup, LinksGroupProps } from "@/components/NavigationBar/NavbarlinksGroup/NavbarLiksGroup";
+import { LinksGroup, LinksGroupProps } from "@/components/navigation-bar/NavbarlinksGroup/NavbarLiksGroup";
 
-import classes from "@/components/NavigationBar/NavbarNested.module.css";
+import classes from "@/components/navigation-bar/NavbarNested.module.css";
 
 import routepaths from "@/libs/routepaths";
-import { UserButton } from "@/components/common/buttons/UserButtons/UserButton";
+import UserButton from "@/components/common/buttons/UserButtons/UserButton";
 //
-const mockdata2: LinksGroupProps[] = [
+const adminNavigationLinks: LinksGroupProps[] = [
   { label: "Dashboard", icon: IconGauge, link: routepaths.dashboard },
   {
     label: "Trainer",
@@ -61,7 +61,7 @@ const mockdata2: LinksGroupProps[] = [
 ];
 
 export function NavbarNested() {
-  const links = mockdata2.map((item) => <LinksGroup {...item} key={item.label} />);
+  const links = adminNavigationLinks.map((item) => <LinksGroup {...item} key={item.label} />);
 
   return (
     <nav className={classes.navbar}>

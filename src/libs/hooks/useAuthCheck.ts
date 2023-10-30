@@ -10,11 +10,13 @@ const useAuthCheck = () => {
   useEffect(() => {
     const token = localStorage.getItem("jwt");
     if (!authToken && token) {
-      const isAuth = isAuthenticated();
-      const parsedToken = JSON.parse(token);
-      console.log("i am from use auth check");
-      isAuth && dispatch(userLoggedIn({ accessToken: parsedToken }));
-      setAuthChecked(true);
+      const isAuth = isAuthenticated(); // checks if token expired or not
+      if (isAuth) {
+        const parsedToken = JSON.parse(token);
+        console.log("i am from use auth check");
+        dispatch(userLoggedIn({ accessToken: parsedToken }));
+        setAuthChecked(true);
+      }
     }
   }, [dispatch, setAuthChecked, authToken]);
 

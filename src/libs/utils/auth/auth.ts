@@ -1,6 +1,6 @@
 import jwtDecode, { JwtPayload } from "jwt-decode";
 
-export const authenticate = (token: string, cb: Function) => {
+export const authenticate = (token: string, cb: () => void) => {
   if (typeof window !== "undefined") {
     localStorage.setItem("jwt", JSON.stringify(token));
   }
@@ -35,7 +35,7 @@ export const userInfo = () => {
   return { ...decoded, token: jwt };
 };
 
-export const signOut = (cb: Function) => {
+export const signOut = (cb: () => void) => {
   if (typeof window !== "undefined") {
     localStorage.removeItem("jwt");
   }
