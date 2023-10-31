@@ -1,19 +1,27 @@
-import { useAppSelector } from "@/app/hooks";
 import PackageList from "@/components/package/PackageList";
 import { useGetPackagesQuery } from "@/features/packages/packageAPI";
+import { Button } from "@mantine/core";
 import { FC } from "react";
+import { useNavigate } from "react-router-dom";
 
 const PackageListPage: FC = () => {
-  const token = useAppSelector((state) => state.auth.accessToken);
-  console.log({ token });
+  const navigate = useNavigate();
   const { data: packageData, isLoading, error } = useGetPackagesQuery();
-  console.log({ packageData, isLoading, error });
 
   if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error</div>;
+  if (error) return <div>Error while loading Retry later</div>;
   if (!packageData) return <div>No data</div>;
 
-  return <PackageList data={packageData} />;
+  return (
+    <>
+      <div className="h-22 flex w-full flex-row items-center justify-end">
+        <Button variant="filled" onClick={() => navigate("/")}>
+          Add New
+        </Button>
+      </div>
+      <PackageList data={packageData} />
+    </>
+  );
 };
 
 export default PackageListPage;

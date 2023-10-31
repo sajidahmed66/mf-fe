@@ -26,6 +26,8 @@ import NotFound from "@/pages/not-found/index.pages";
 //
 import RootElement from "@/components/layout/RootElement";
 import PackageListPage from "@/pages/pakages/list.page";
+import AddPackagePage from "@/pages/pakages/add.page";
+import EditPackagePage from "@/pages/pakages/edit.page";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -61,6 +63,8 @@ const router = createBrowserRouter(
         </Route>
         <Route path="packages">
           <Route index element={<PackageListPage />} />
+          <Route path="create-package" element={<AddPackagePage />} />
+          <Route path="edit/:id" element={<EditPackagePage />} />
         </Route>
       </Route>
       <Route path="/login">
