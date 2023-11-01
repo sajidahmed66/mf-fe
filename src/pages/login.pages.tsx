@@ -23,7 +23,6 @@ const Login: React.FC = () => {
           {!checkingAuth && !authCheck && <LoginComponent />}
         </div>
       </div>
-      )
     </>
   );
 };

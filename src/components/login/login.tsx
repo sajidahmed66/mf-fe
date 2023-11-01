@@ -57,7 +57,7 @@ const LoginComponent: FC = () => {
   }, [data, responseError]);
 
   return (
-    <Box className="m-auto w-full max-w-sm">
+    <Box className="w-full max-w-sm">
       {/* TODO need to do error handeling for wrong credentials */}
       {error && (
         <Alert variant="light" color="red" title="Error" icon={iconError}>

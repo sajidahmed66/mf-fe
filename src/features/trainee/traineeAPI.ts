@@ -1,4 +1,5 @@
 import apiSlice from "@/features/api/apiSlice";
+import { ITraineeData } from "@/libs/types";
 
 const traineeAPI = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -9,7 +10,14 @@ const traineeAPI = apiSlice.injectEndpoints({
       }),
       //   onQueryStarted,
     }),
+    createTrainee: builder.mutation({
+      query: (data: ITraineeData) => ({
+        url: "/admin/trainees",
+        method: "POST",
+        body: data,
+      }),
+    }),
   }),
 });
 
-export const { useGetTraineeListQuery } = traineeAPI;
+export const { useGetTraineeListQuery, useCreateTraineeMutation } = traineeAPI;
