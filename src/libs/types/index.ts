@@ -9,3 +9,21 @@ export interface IPackageData {
     lastname: string;
   };
 }
+
+export interface ITraineeData {
+  firstname: string;
+  lastname: string;
+  phone: number;
+  subscriptionType: number;
+  packageType: string;
+  totalAmount: number;
+  registrationAmount: number;
+  subscriptionAmount: number;
+  paidAmount: number;
+}
+
+export interface ITrainerData {}
+
+export interface IWorkoutData {}
+
+export interface IDietData {}

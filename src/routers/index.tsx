@@ -63,7 +63,7 @@ const router = createBrowserRouter(
         </Route>
         <Route path="packages">
           <Route index element={<PackageListPage />} />
-          <Route path="create-package" element={<AddPackagePage />} />
+          <Route path="add" element={<AddPackagePage />} />
           <Route path="edit/:id" element={<EditPackagePage />} />
         </Route>
       </Route>

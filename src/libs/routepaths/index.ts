@@ -20,6 +20,8 @@ export default {
   workout_request: "/workout/requested-plan",
   // payment and packages
   packages_list: "/packages",
+  add_package: "/packages/add",
+  edit_package: (id: string) => `/packages/edit/${id}`,
   //
   profile: "/profile",
   profile_edit: "/profile/edit-profile",

@@ -1,5 +1,6 @@
 import PackageList from "@/components/package/PackageList";
 import { useGetPackagesQuery } from "@/features/packages/packageAPI";
+import routepaths from "@/libs/routepaths";
 import { Button } from "@mantine/core";
 import { FC } from "react";
 import { useNavigate } from "react-router-dom";
@@ -15,7 +16,7 @@ const PackageListPage: FC = () => {
   return (
     <>
       <div className="h-22 flex w-full flex-row items-center justify-end">
-        <Button variant="filled" onClick={() => navigate("/")}>
+        <Button variant="filled" onClick={() => navigate(routepaths.add_package)}>
           Add New
         </Button>
       </div>
