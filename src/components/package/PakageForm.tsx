@@ -1,5 +1,7 @@
+import { IPackageData } from "@/libs/types";
 import { Box, Button, Fieldset, NumberInput, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
+import { FC, useLayoutEffect } from "react";
 
 export interface IPackageForm {
   name: string;
@@ -7,7 +9,11 @@ export interface IPackageForm {
   time_duration: number;
 }
 
-const PakageForm = () => {
+interface IPackageFormProps {
+  initialValues?: IPackageData;
+}
+
+const PakageForm: FC<IPackageFormProps> = ({ initialValues }) => {
   const packageForm = useForm<IPackageForm>({
     initialValues: {
       name: "",
@@ -20,6 +26,14 @@ const PakageForm = () => {
   });
 
   const handleSubmit = packageForm.onSubmit((values) => console.log(values));
+
+  useLayoutEffect(() => {
+    if (initialValues) {
+      packageForm.setValues(initialValues);
+      packageForm.resetDirty(initialValues); // TODO  do not know what it does need to figure out before i ship
+    }
+  }, [initialValues, packageForm]);
+
   return (
     <Box mx="auto" miw={300} className="sm:space-y-4 md:space-y-6">
       <Fieldset legend="Package details">

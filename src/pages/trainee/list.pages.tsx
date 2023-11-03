@@ -2,9 +2,8 @@ import BreadCrumb from "@/components/breadcrumb/BreadCrumb";
 import TraineeListData from "@/components/trainee/TraineeList";
 import routepaths from "@/libs/routepaths";
 import { ChangeEventHandler, FC, SyntheticEvent, useState } from "react";
-import { Pagination, TextInput, rem } from '@mantine/core';
+import { Pagination, TextInput, rem } from "@mantine/core";
 import { IconSearch } from "@tabler/icons-react";
-
 
 const TraineeListPageBreadcrumb = [
   {
@@ -18,15 +17,15 @@ const TraineeListPageBreadcrumb = [
 ];
 const TraineeList: FC = () => {
   const [activePage, setPage] = useState(1);
-  const [search, setSearch] = useState("")
+  const [search, setSearch] = useState("");
   const handleSearchChange = (event: ChangeEventHandler<HTMLInputElement>) => {
-    const { value } = event.currentTarget
+    const { value } = event.currentTarget;
     setSearch(value);
-  }
+  };
   return (
     <div>
       <BreadCrumb items={TraineeListPageBreadcrumb} />
-      <div className="w-full h-full p-4 md:p-8">
+      <div className="h-full w-full p-4 md:p-8">
         {/* search item */}
         <TextInput
           placeholder="Search by any field"
@@ -37,8 +36,7 @@ const TraineeList: FC = () => {
         />
         <TraineeListData />
         {/* pagination */}
-        <div className="w-full px-8 py-4 flex flex-row items-center justify-center">
-
+        <div className="flex w-full flex-row items-center justify-center px-8 py-4">
           <Pagination value={activePage} onChange={setPage} total={10} />
         </div>
       </div>

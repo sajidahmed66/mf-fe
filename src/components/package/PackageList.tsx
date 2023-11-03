@@ -3,12 +3,20 @@ import { IconEdit, IconTrash } from "@tabler/icons-react";
 import { Button, Table } from "@mantine/core";
 import { FC } from "react";
 import { convertedDate } from "@/libs/utils/date";
+import { useNavigate } from "react-router-dom";
+import routepaths from "@/libs/routepaths";
 
 interface IPackageListProps {
   data: IPackageData[];
+  deletePackage: (id: string) => void;
 }
 
-const PackageList: FC<IPackageListProps> = ({ data }) => {
+const PackageList: FC<IPackageListProps> = ({ data, deletePackage }) => {
+  const navigate = useNavigate();
+
+  const handleDeletePackage = (id: string) => {
+    deletePackage(id);
+  };
   const rows = data.map((p) => (
     <Table.Tr key={p._id}>
       <Table.Td>{p.name}</Table.Td>
@@ -18,10 +26,16 @@ const PackageList: FC<IPackageListProps> = ({ data }) => {
       <Table.Td>{p.entryBy.firstname + " " + p.entryBy.lastname}</Table.Td>
       <Table.Td>
         <Button.Group>
-          <Button variant="default">
+          <Button variant="default" onClick={() => navigate(routepaths.edit_package(p._id))}>
             <IconEdit size={18} />
           </Button>
-          <Button variant="default" bg={"red"}>
+          <Button
+            variant="default"
+            bg={"red"}
+            onClick={() => {
+              handleDeletePackage(p._id);
+            }}
+          >
             <IconTrash size={18} />
           </Button>
         </Button.Group>
