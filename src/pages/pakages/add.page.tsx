@@ -1,5 +1,11 @@
+import PackageForm from "@/components/package/PakageForm";
+
 const AddPackagePage = () => {
-  return <div>AddPackagePage</div>;
+  return (
+    <div>
+      <PackageForm edit={false} />
+    </div>
+  );
 };
 
 export default AddPackagePage;

@@ -45,8 +45,10 @@ const TraineeForm: React.FC<ITraineeForm> = ({ initialValues, packageList }) => 
       createTraineeForm.setValues(initialValues);
       createTraineeForm.resetDirty(initialValues); // TODO  do not know what it does need to figure out before i ship
     }
-  }, [initialValues, createTraineeForm]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialValues]);
 
+  // renders package data after selecting package option
   const renderPackagelist = (packageList: IPackageData[]) => {
     const availablePackagelist = (
       <Radio.Group

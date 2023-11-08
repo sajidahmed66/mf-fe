@@ -32,16 +32,19 @@ const LoginComponent: FC = () => {
     },
   });
 
-  const handleSubmit = useCallback((values: loginTypes) => {
-    try {
-      login({
-        phone: values.phone,
-        password: values.password,
-      });
-    } catch (error) {
-      console.log({ error });
-    }
-  }, []);
+  const handleSubmit = useCallback(
+    (values: loginTypes) => {
+      try {
+        login({
+          phone: values.phone,
+          password: values.password,
+        });
+      } catch (error) {
+        console.log({ error });
+      }
+    },
+    [login],
+  );
 
   useEffect(() => {
     if (responseError) {

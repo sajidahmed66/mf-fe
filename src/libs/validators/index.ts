@@ -8,14 +8,14 @@ export const validatePhoneNumber = (value: string) => {
 
 export const validatePassword = (value: string) => {
   // const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
-  const matcher = yup.string().min(6);
+  const matcher = yup.string().min(6).required("value cannot be empty");
   return matcher.isValidSync(value);
 };
 
 export const validateName = (value: string) => {
   const matcher = yup.string().min(3);
   return matcher.isValidSync(value);
-}
+};
 
 export const validateNumber = (value: number) => {
   const matcher = yup.number().min(1);
@@ -23,7 +23,6 @@ export const validateNumber = (value: number) => {
 };
 
 export const validatePackageType = (value: string) => {
-  const matcher = yup.mixed().oneOf(['monthly', 'package']);
+  const matcher = yup.mixed().oneOf(["monthly", "package"]);
   return matcher.isValidSync(value);
-
-}
+};
