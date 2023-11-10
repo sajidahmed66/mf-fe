@@ -13,6 +13,7 @@ export const authApi = apiSlice.injectEndpoints({
       onQueryStarted: async (_arg, { queryFulfilled, dispatch }) => {
         try {
           const result = await queryFulfilled;
+          console.log("auth", result.data.token);
           authenticate(result.data.token, () => {
             dispatch(userLoggedIn({ accessToken: result.data.token }));
           });

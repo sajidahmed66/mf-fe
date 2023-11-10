@@ -1,28 +1,28 @@
+import AuthLoader from "@/components/login/AuthLoader";
 import LoginComponent from "@/components/login/login";
-import { isAuthenticated } from "@/libs/utils/auth/auth";
-import { useEffect } from "react";
+import useAuthCheck from "@/libs/hooks/useAuthCheck";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Login: React.FC = () => {
-  const isUserLoggedIn = isAuthenticated();
   const navigate = useNavigate();
+  const authCheck = useAuthCheck();
+  const [checkingAuth, setIsCheckingAuth] = useState<boolean>(true);
   //avigate
   useEffect(() => {
-    if (isUserLoggedIn) {
+    if (authCheck) {
       navigate("/");
     }
-  });
+    setIsCheckingAuth(false);
+  }, [authCheck, navigate]);
   return (
     <>
-      {!isAuthenticated() ? (
-        <div className=" h-[100vh] w-[100vw]">
-          <div className="flex items-center justify-center w-full h-full flex-clo">
-            <LoginComponent />
-          </div>
+      <div className=" h-[100vh] w-[100vw]">
+        <div className="flex-clo flex h-full w-full items-center justify-center">
+          {checkingAuth && <AuthLoader />}
+          {!checkingAuth && !authCheck && <LoginComponent />}
         </div>
-      ) : (
-        <div></div>
-      )}
+      </div>
     </>
   );
 };

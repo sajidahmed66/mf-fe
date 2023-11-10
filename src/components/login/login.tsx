@@ -17,7 +17,8 @@ const LoginComponent: FC = () => {
   const [login, { data, error: responseError, isLoading }] = useLoginMutation();
   const navigate = useNavigate();
   const iconError = <IconAlertTriangle size={16} />;
-  const form = useForm({
+
+  const loginForm = useForm({
     initialValues: {
       phone: "",
       password: "",
@@ -31,16 +32,19 @@ const LoginComponent: FC = () => {
     },
   });
 
-  const handleSubmit = useCallback((values: loginTypes) => {
-    try {
-      login({
-        phone: values.phone,
-        password: values.password,
-      });
-    } catch (error) {
-      console.log({ error });
-    }
-  }, []);
+  const handleSubmit = useCallback(
+    (values: loginTypes) => {
+      try {
+        login({
+          phone: values.phone,
+          password: values.password,
+        });
+      } catch (error) {
+        console.log({ error });
+      }
+    },
+    [login],
+  );
 
   useEffect(() => {
     if (responseError) {
@@ -53,29 +57,29 @@ const LoginComponent: FC = () => {
     if (data?.token) {
       navigate("/dashboard");
     }
-  }, [data, responseError]);
+  }, [data, responseError, navigate]);
 
   return (
-    <Box className="w-full max-w-sm m-auto">
+    <Box className="w-full max-w-sm">
       {/* TODO need to do error handeling for wrong credentials */}
       {error && (
         <Alert variant="light" color="red" title="Error" icon={iconError}>
           {error}
         </Alert>
       )}
-      <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
+      <form onSubmit={loginForm.onSubmit((values) => handleSubmit(values))}>
         <TextInput
           type="number"
           withAsterisk
           label="Phone"
           placeholder="01**********"
-          {...form.getInputProps("phone")}
+          {...loginForm.getInputProps("phone")}
         />
-        <TextInput withAsterisk label="Password" hidden {...form.getInputProps("password")} />
+        <TextInput withAsterisk label="Password" hidden {...loginForm.getInputProps("password")} />
         <Checkbox
           mt="md"
           label="I agree to terms and conditions"
-          {...form.getInputProps("termsOfService", { type: "checkbox" })}
+          {...loginForm.getInputProps("termsOfService", { type: "checkbox" })}
         />
         <Group justify="flex-end" mt="md">
           {isLoading ? <Button loading>Logging in ... </Button> : <Button type="submit">Login</Button>}

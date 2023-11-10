@@ -7,7 +7,7 @@ interface IcontainerProps {
 const Container: FC<IcontainerProps> = ({ children }) => {
   return (
     <div className="w-full h-full">
-      <div className="p-8">{children}</div>
+      <div className="sm:p-4 md:p-6">{children}</div>
     </div>
   );
 };

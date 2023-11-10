@@ -10,7 +10,6 @@ export default defineConfig({
         icon: true,
       },
     }),
-    ,
     tsconfigPaths(),
     react(),
   ],

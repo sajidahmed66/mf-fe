@@ -1,7 +1,10 @@
+import { useAppSelector } from "@/app/hooks";
 import BreadCrumb from "@/components/breadcrumb/BreadCrumb";
 import { FC } from "react";
 
 const Dashboard: FC = () => {
+  const { accessToken } = useAppSelector((state) => state.auth);
+  console.log("dashboard index page ", accessToken);
   return (
     <div>
       <BreadCrumb

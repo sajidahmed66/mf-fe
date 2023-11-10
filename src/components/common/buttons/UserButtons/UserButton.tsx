@@ -4,10 +4,12 @@ import classes from "./UserButton.module.css";
 import { userLoggedOut } from "@/features/auth/authSlice";
 import { signOut } from "@/libs/utils/auth/auth";
 import { useAppDispatch } from "@/app/hooks";
+import { useNavigate } from "react-router-dom";
 // import { isAuthenticated, userInfo } from "@/libs/utils/auth/auth";
 
-export function UserButton() {
+const  UserButton=()=> {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate()
   // TODO need to implement a hook to get userinfo from token or call an api or something
   // };
   return (
@@ -15,6 +17,7 @@ export function UserButton() {
       className={classes.user}
       onClick={() => {
         signOut(() => dispatch(userLoggedOut()));
+        navigate("/login")
       }}
     >
       <Group>
@@ -39,3 +42,6 @@ export function UserButton() {
     </UnstyledButton>
   );
 }
+
+
+export default UserButton;

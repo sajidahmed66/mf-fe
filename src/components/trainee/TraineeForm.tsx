@@ -1,54 +1,101 @@
 import React, { useLayoutEffect } from "react";
 import { useForm } from "@mantine/form";
 import { Box, NumberInput, TextInput, Fieldset, Radio, Group, Button } from "@mantine/core";
+import { validateName } from "@/libs/validators";
+import { IPackageData } from "@/libs/types";
 interface ICreateTraineeFormValues {
   firstName: string;
   lastName: string;
   mobileNumber: string;
   registrationFee: number;
   subscriptionType: string;
+  subscriptionPackageID?: string;
   monthlyFee: number;
   totalAmount: number;
   paidAmount: number;
 }
 
 interface ITraineeForm {
-  initialValues?: ICreateTraineeFormValues | undefined
+  initialValues?: ICreateTraineeFormValues | undefined;
+  packageList?: IPackageData[];
 }
 
-const TraineeForm: React.FC<ITraineeForm> = ({ initialValues }) => {
+const TraineeForm: React.FC<ITraineeForm> = ({ initialValues, packageList }) => {
   const createTraineeForm = useForm<ICreateTraineeFormValues>({
     initialValues: {
-      firstName: '',
-      lastName: '',
-      mobileNumber: '',
+      firstName: "",
+      lastName: "",
+      mobileNumber: "",
       monthlyFee: 0,
       registrationFee: 0,
       paidAmount: 0,
-      subscriptionType: '',
-      totalAmount: 0
+      subscriptionType: "",
+      totalAmount: 0,
+      subscriptionPackageID: "",
+    },
+
+    validate: {
+      firstName: (value) => (validateName(value) ? null : "name must"),
     },
   });
 
-  const handleSubmit = createTraineeForm.onSubmit(values => console.log({ values }))
+  const handleSubmit = createTraineeForm.onSubmit((values) => console.log(values));
   useLayoutEffect(() => {
     if (initialValues) {
-      createTraineeForm.setValues(initialValues)
-      createTraineeForm.resetDirty(initialValues) // iTODO  do not know what it does need to figure out before i ship
+      createTraineeForm.setValues(initialValues);
+      createTraineeForm.resetDirty(initialValues); // TODO  do not know what it does need to figure out before i ship
     }
-  }, [initialValues, createTraineeForm])
-  return (
-    <Box mx='auto' miw={320} >
-      <Fieldset legend="Member information">
-        <TextInput label="First Name" placeholder="First Name" {...createTraineeForm.getInputProps('firstName')} />
-        <TextInput label="Last Name" placeholder="Last Name" {...createTraineeForm.getInputProps('lastName')} />
-        <TextInput label="Phone Number" placeholder="Enter your phone number" {...createTraineeForm.getInputProps('mobileNumber')} />
-      </Fieldset>
-      <Fieldset legend="Registration details" >
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialValues]);
 
-        <NumberInput label="Registration Fee" allowNegative={false} allowDecimal={false} placeholder="Registration fee" min={0} {...createTraineeForm.getInputProps("registrationFee")} />
+  // renders package data after selecting package option
+  const renderPackagelist = (packageList: IPackageData[]) => {
+    const availablePackagelist = (
+      <Radio.Group
+        label="select a package type"
+        withAsterisk
+        {...createTraineeForm.getInputProps("subscriptionPackageID")}
+      >
+        <Group mt="xs">
+          {packageList.map((p) => (
+            <Radio value={p._id} label={p.name} />
+          ))}
+        </Group>
+      </Radio.Group>
+    );
+    return availablePackagelist;
+  };
+
+  return (
+    <Box mx="auto" miw={300} className="sm:space-y-4 md:space-y-6">
+      <Fieldset legend="Member information">
+        <TextInput
+          label="First Name"
+          placeholder="First Name"
+          {...createTraineeForm.getInputProps("firstName")}
+        />
+        <TextInput
+          label="Last Name"
+          placeholder="Last Name"
+          {...createTraineeForm.getInputProps("lastName")}
+        />
+        <TextInput
+          label="Phone Number"
+          placeholder="Enter your phone number"
+          {...createTraineeForm.getInputProps("mobileNumber")}
+        />
+      </Fieldset>
+
+      <Fieldset legend="Registration details">
+        <NumberInput
+          label="Registration Fee"
+          allowNegative={false}
+          allowDecimal={false}
+          placeholder="Registration fee"
+          min={0}
+          {...createTraineeForm.getInputProps("registrationFee")}
+        />
         <Radio.Group
-          name="favoriteFramework"
           label="Choose Subscription type"
           withAsterisk
           {...createTraineeForm.getInputProps("subscriptionType")}
@@ -58,12 +105,32 @@ const TraineeForm: React.FC<ITraineeForm> = ({ initialValues }) => {
             <Radio value="package" label="Package" />
           </Group>
         </Radio.Group>
+        <div className="py-2">
+          {packageList && createTraineeForm.values.subscriptionType === "package"
+            ? renderPackagelist(packageList)
+            : null}
+        </div>
       </Fieldset>
-      <Fieldset legend="Payment Details" >
-        <NumberInput label="Total Amount" allowNegative={false} allowDecimal={false} placeholder="Registration fee" min={0} {...createTraineeForm.getInputProps("totalAmount")} />
-        <NumberInput label="Paid Amount" allowNegative={false} allowDecimal={false} placeholder="Registration fee" min={0} {...createTraineeForm.getInputProps("paidAmount")} />
+
+      <Fieldset legend="Payment Details">
+        <NumberInput
+          label="Total Amount"
+          allowNegative={false}
+          allowDecimal={false}
+          placeholder="Registration fee"
+          min={0}
+          {...createTraineeForm.getInputProps("totalAmount")}
+        />
+        <NumberInput
+          label="Paid Amount"
+          allowNegative={false}
+          allowDecimal={false}
+          placeholder="Registration fee"
+          min={0}
+          {...createTraineeForm.getInputProps("paidAmount")}
+        />
       </Fieldset>
-      <Button className="mt-4" variant="filled" onClick={() => handleSubmit()} >
+      <Button className="mt-4" variant="filled" onClick={() => handleSubmit()}>
         Create New Member
       </Button>
     </Box>

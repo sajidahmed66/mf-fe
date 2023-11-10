@@ -1,18 +1,16 @@
 import { useAppSelector } from "@/app/hooks";
 import Layout from "@/components/layout/Appshell";
-import { isAuthenticated } from "@/libs/utils/auth/auth";
 import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 
 const RootElement = () => {
   const navigate = useNavigate();
-  const token = useAppSelector((state) => state.auth.accessToken);
-
+  const authToken = useAppSelector((state) => state.auth.accessToken);
   useEffect(() => {
-    if (token === undefined && isAuthenticated() === false) {
+    if (!authToken) {
       navigate("/login");
     }
-  }, [token, isAuthenticated]);
+  }, [authToken, navigate]);
 
   return (
     <>

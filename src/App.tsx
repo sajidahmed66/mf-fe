@@ -10,14 +10,16 @@ import { Provider } from "react-redux";
 import { store } from "@/app/store";
 // routes related imports
 
-
 // css
-import '@mantine/dates/styles.css';
+import "@mantine/dates/styles.css";
+import { ModalsProvider } from "@mantine/modals";
 function App() {
   return (
     <Provider store={store}>
       <MantineProvider defaultColorScheme="dark">
-        <RouterProvider router={router} />
+        <ModalsProvider>
+          <RouterProvider router={router} />
+        </ModalsProvider>
       </MantineProvider>
     </Provider>
   );

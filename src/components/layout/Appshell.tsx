@@ -2,7 +2,7 @@ import { useDisclosure } from "@mantine/hooks";
 import { AppShell, Burger, Group } from "@mantine/core";
 import React, { FC } from "react";
 import Logo from "src/assets/svg/logo.svg?react";
-import { NavbarNested } from "@/components/NavigationBar/SideNavigationDrawer";
+import { NavbarNested } from "@/components/navigation-bar/SideNavigationDrawer";
 import Container from "@/components/common/ui/Container";
 
 interface ILayoutProps {
@@ -11,7 +11,6 @@ interface ILayoutProps {
 
 const Layout: FC<ILayoutProps> = ({ children }) => {
   const [opened, { toggle }] = useDisclosure();
-
   return (
     <AppShell
       header={{ height: 60 }}

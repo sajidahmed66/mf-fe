@@ -55,8 +55,8 @@ const EditProfieForm: FC<IEditProfileProps> = ({ initialValues }) => {
                 <DateInput label="Date of Birth" placeholder="Enter your date of birth" {...editProfileForm.getInputProps('dob')} />
             </Fieldset>
             <Fieldset legend="Health stats">
-                <NumberInput label="Height" placeholder="Enter your height" {...editProfileForm.getInputProps('height')} />
-                <NumberInput label="Weight" placeholder="Enter your weight" {...editProfileForm.getInputProps('weight')} />
+                <NumberInput label="Height" placeholder="Enter your height" allowNegative={false} {...editProfileForm.getInputProps('height')} />
+                <NumberInput label="Weight" placeholder="Enter your weight" allowNegative={false} {...editProfileForm.getInputProps('weight')} />
             </Fieldset>
             <div className='flex flex-row items-center justify-start'>
                 <Button className="mt-4" variant="filled" onClick={() => handleSubmit()} >

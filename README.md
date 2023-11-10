@@ -31,3 +31,13 @@ todo
    3.  implement protected route.
    4.  layout impementation on the basic pages(done)
    5.  ready mockup for all pages.
+
+
+
+Nameing Guidlines 
+
+every page should have .page.tsx extension
+
+every page component should have page surffix 
+
+component should be group by folder for specific page
