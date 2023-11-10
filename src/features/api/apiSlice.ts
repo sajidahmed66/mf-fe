@@ -27,8 +27,9 @@ const apiSlice = createApi({
     }
     return result;
   },
-  tagTypes: [],
+  tagTypes: ["Packages"],
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   endpoints: (builder) => ({}),
 });
 

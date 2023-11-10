@@ -8,6 +8,7 @@ const packageAPI = apiSlice.injectEndpoints({
         url: "admin/packages",
         method: "GET",
       }),
+      providesTags: ["Packages"],
     }),
     getPackageById: builder.query<IPackageData, string>({
       query: (id) => ({
@@ -21,6 +22,7 @@ const packageAPI = apiSlice.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["Packages"],
     }),
     updatePackage: builder.mutation<
       IPackageData,
@@ -31,12 +33,14 @@ const packageAPI = apiSlice.injectEndpoints({
         method: "PUT",
         body: data,
       }),
+      invalidatesTags: ["Packages"],
     }),
-    deletePackage: builder.mutation<void, string>({
+    deletePackage: builder.mutation<IPackageData, string>({
       query: (id) => ({
-        url: `admin/package/${id}`,
+        url: `admin/packages/${id}`,
         method: "DELETE",
       }),
+      invalidatesTags: ["Packages"],
     }),
   }),
 });

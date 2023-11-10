@@ -57,7 +57,7 @@ const LoginComponent: FC = () => {
     if (data?.token) {
       navigate("/dashboard");
     }
-  }, [data, responseError]);
+  }, [data, responseError, navigate]);
 
   return (
     <Box className="w-full max-w-sm">

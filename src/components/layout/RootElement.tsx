@@ -10,7 +10,7 @@ const RootElement = () => {
     if (!authToken) {
       navigate("/login");
     }
-  }, [authToken]);
+  }, [authToken, navigate]);
 
   return (
     <>

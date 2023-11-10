@@ -12,11 +12,14 @@ import { store } from "@/app/store";
 
 // css
 import "@mantine/dates/styles.css";
+import { ModalsProvider } from "@mantine/modals";
 function App() {
   return (
     <Provider store={store}>
       <MantineProvider defaultColorScheme="dark">
-        <RouterProvider router={router} />
+        <ModalsProvider>
+          <RouterProvider router={router} />
+        </ModalsProvider>
       </MantineProvider>
     </Provider>
   );

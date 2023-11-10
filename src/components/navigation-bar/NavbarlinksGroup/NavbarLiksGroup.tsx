@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { Group, Box, Collapse, ThemeIcon, Text, UnstyledButton, rem } from "@mantine/core";
-import { IconCalendarStats, IconChevronRight } from "@tabler/icons-react";
+import { IconChevronRight } from "@tabler/icons-react";
 import classes from "./NavbarLinksGroup.module.css";
 import { useNavigate } from "react-router-dom";
+import { TablerIconsProps } from "@tabler/icons-react";
 export interface LinksGroupProps {
-  icon: React.FC<any>;
+  icon: React.FC<TablerIconsProps>;
   label: string;
   initiallyOpened?: boolean;
   link?: string;
@@ -60,4 +61,3 @@ export function LinksGroup({ icon: Icon, label, initiallyOpened, links, link }: 
     </>
   );
 }
-
