@@ -6,6 +6,7 @@ import Login from "@/pages/login.pages";
 import TrainerList from "@/pages/trainer/list.pages";
 import TrainerDetails from "@/pages/trainer/details.pages";
 import TrainerCreation from "@/pages/trainer/new.pages";
+import EditTraineePage from "@/pages/trainee/edit.page";
 //
 import TraineeList from "@/pages/trainee/list.pages";
 import TraineeCreation from "@/pages/trainee/new.pages";
@@ -43,6 +44,7 @@ const router = createBrowserRouter(
         <Route path="trainee">
           <Route index element={<TraineeList />} />
           <Route path="add-new" element={<TraineeCreation />} />
+          <Route path="edit/:id" element={<EditTraineePage />} />
           <Route path=":id" element={<Traineedetails />} />
         </Route>
         <Route path="diet">
