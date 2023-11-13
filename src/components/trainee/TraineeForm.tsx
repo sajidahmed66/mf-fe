@@ -8,8 +8,8 @@ export interface ICreateTraineeFormValues {
   lastName: string;
   mobileNumber: string;
   registrationFee: number;
-  subscriptionType: string | number;
-  subscriptionPackageID?: string; // this option only pops up if the subscription type is package
+  subscriptionType: 1 | 2;
+  packageType?: string; // this option only pops up if the subscription type is package
   monthlyFee: number;
   totalAmount: number;
   paidAmount: number;
@@ -19,9 +19,10 @@ export interface ITraineeFormProps {
   initialValues?: ICreateTraineeFormValues | undefined;
   packageList?: IPackageData[];
   edit: boolean;
+  id?: string;
 }
 
-const TraineeForm: React.FC<ITraineeFormProps> = ({ initialValues, packageList, edit }) => {
+const TraineeForm: React.FC<ITraineeFormProps> = ({ initialValues, packageList, edit, id }) => {
   const createTraineeForm = useForm<ICreateTraineeFormValues>({
     initialValues: {
       firstName: "",
@@ -30,9 +31,9 @@ const TraineeForm: React.FC<ITraineeFormProps> = ({ initialValues, packageList, 
       monthlyFee: 0,
       registrationFee: 0,
       paidAmount: 0,
-      subscriptionType: "",
+      subscriptionType: 1,
       totalAmount: 0,
-      subscriptionPackageID: "",
+      packageType: "",
     },
 
     validate: {
@@ -48,11 +49,8 @@ const TraineeForm: React.FC<ITraineeFormProps> = ({ initialValues, packageList, 
       lastName: values.lastName,
       mobileNumber: values.mobileNumber,
       monthlyFee: values.monthlyFee,
-      subscriptionType: values.subscriptionType === "monthly" ? 0 : 1,
-      subscriptionPackageID:
-        values.subscriptionType === "package" && values.subscriptionPackageID
-          ? values.subscriptionPackageID
-          : "",
+      subscriptionType: values.subscriptionType,
+      packageType: values.subscriptionType === 2 && values.packageType ? values.packageType : "",
       paidAmount: values.paidAmount,
       registrationFee: values.registrationFee,
       totalAmount: values.totalAmount,
@@ -77,11 +75,7 @@ const TraineeForm: React.FC<ITraineeFormProps> = ({ initialValues, packageList, 
     >,
   ) => {
     const availablePackagelist = (
-      <Radio.Group
-        label="select a package type"
-        withAsterisk
-        {...form.getInputProps("subscriptionPackageID")}
-      >
+      <Radio.Group label="select a package type" withAsterisk {...form.getInputProps("packageType")}>
         <Group mt="xs">
           {packageList.map((p) => (
             <Radio value={p._id} label={p.name} />
@@ -128,12 +122,12 @@ const TraineeForm: React.FC<ITraineeFormProps> = ({ initialValues, packageList, 
           {...createTraineeForm.getInputProps("subscriptionType")}
         >
           <Group mt="xs">
-            <Radio value="monthly" label="Monthly" />
-            <Radio value="package" label="Package" />
+            <Radio value={1} label="Monthly" />
+            <Radio value={2} label="Package" />
           </Group>
         </Radio.Group>
         <div className="py-2">
-          {packageList && createTraineeForm.values.subscriptionType === "package"
+          {packageList && createTraineeForm.values.subscriptionType === 2
             ? renderPackagelist(packageList, createTraineeForm)
             : null}
         </div>

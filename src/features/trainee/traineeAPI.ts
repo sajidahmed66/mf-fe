@@ -3,7 +3,7 @@ import { ITraineeData } from "@/libs/types";
 
 const traineeAPI = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getTraineeList: builder.query({
+    getTraineeList: builder.query<ITraineeData[], void>({
       query: () => ({
         url: "/admin/trainees",
         method: "GET",

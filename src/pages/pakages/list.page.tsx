@@ -46,8 +46,8 @@ const PackageListPage: FC = () => {
   return (
     <div>
       <BreadCrumb items={PackageListPageBreadcrumb} />
-      <div className="w-full h-full p-4 md:p-8">
-        <div className="flex flex-row items-center justify-end w-full h-22">
+      <div className="h-full w-full p-4 md:p-8">
+        <div className="h-22 flex w-full flex-row items-center justify-end">
           <Button variant="filled" onClick={() => navigate(routepaths.add_package)}>
             Add New
           </Button>

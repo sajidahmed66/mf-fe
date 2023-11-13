@@ -37,11 +37,14 @@ export interface ITraineeData {
   lastname: string;
   phone: number;
   subscriptionType: number;
-  packageType: string;
-  totalAmount: number;
-  registrationAmount: number;
-  subscriptionAmount: number;
-  paidAmount: number;
+  userRole: number;
+  entryDate: Date;
+  currentPaymentDate: Date;
+  // packageType: string;
+  // totalAmount: number;
+  // registrationAmount: number;
+  // subscriptionAmount: number;
+  // paidAmount: number;
 }
 
 export interface ITrainerData {}

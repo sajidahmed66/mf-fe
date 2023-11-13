@@ -4,6 +4,7 @@ import routepaths from "@/libs/routepaths";
 import { ChangeEventHandler, FC, useState } from "react";
 import { Pagination, TextInput, rem } from "@mantine/core";
 import { IconSearch } from "@tabler/icons-react";
+import { useGetTraineeListQuery } from "@/features/trainee/traineeAPI";
 
 const TraineeListPageBreadcrumb = [
   {
@@ -18,18 +19,27 @@ const TraineeListPageBreadcrumb = [
 const TraineeList: FC = () => {
   const [activePage, setPage] = useState(1);
   const [search, setSearch] = useState("");
+  const { data: trainees, isError, isLoading, error } = useGetTraineeListQuery();
   //
   const handleSearchChange = (event: ChangeEventHandler<HTMLInputElement>) => {
     const { value } = event.currentTarget;
     setSearch(value);
   };
 
+  console.log({ trainees, isError, isLoading, error });
   // TODO implement search function here
   //
+  //
+  if (isLoading) return <div>Loading...</div>;
+  //
+  if (error) return <div>Error while loading Retry later</div>;
+  //
+  if (!trainees) return <div>No data</div>;
+
   return (
     <div>
       <BreadCrumb items={TraineeListPageBreadcrumb} />
-      <div className="w-full h-full p-4 md:p-8">
+      <div className="h-full w-full p-4 md:p-8">
         {/* search item */}
         <TextInput
           placeholder="Search by any field"
@@ -39,9 +49,9 @@ const TraineeList: FC = () => {
           onChange={handleSearchChange} // figure out why is this happing
         />
 
-        <TraineeListData />
+        <TraineeListData trainees={trainees} />
         {/* pagination */}
-        <div className="flex flex-row items-center justify-center w-full px-8 py-4">
+        <div className="flex w-full flex-row items-center justify-center px-8 py-4">
           <Pagination value={activePage} onChange={setPage} total={10} />
         </div>
       </div>
