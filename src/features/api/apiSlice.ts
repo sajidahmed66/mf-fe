@@ -27,7 +27,7 @@ const apiSlice = createApi({
     }
     return result;
   },
-  tagTypes: ["Packages"],
+  tagTypes: ["Packages", "Trainee"],
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   endpoints: (builder) => ({}),
