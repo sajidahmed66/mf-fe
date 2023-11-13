@@ -1,26 +1,27 @@
 import React, { useLayoutEffect } from "react";
-import { useForm } from "@mantine/form";
+import { UseFormReturnType, useForm } from "@mantine/form";
 import { Box, NumberInput, TextInput, Fieldset, Radio, Group, Button } from "@mantine/core";
 import { validateName } from "@/libs/validators";
 import { IPackageData } from "@/libs/types";
-interface ICreateTraineeFormValues {
+export interface ICreateTraineeFormValues {
   firstName: string;
   lastName: string;
   mobileNumber: string;
   registrationFee: number;
-  subscriptionType: string;
-  subscriptionPackageID?: string;
+  subscriptionType: string | number;
+  subscriptionPackageID?: string; // this option only pops up if the subscription type is package
   monthlyFee: number;
   totalAmount: number;
   paidAmount: number;
 }
 
-interface ITraineeForm {
+export interface ITraineeFormProps {
   initialValues?: ICreateTraineeFormValues | undefined;
   packageList?: IPackageData[];
+  edit: boolean;
 }
 
-const TraineeForm: React.FC<ITraineeForm> = ({ initialValues, packageList }) => {
+const TraineeForm: React.FC<ITraineeFormProps> = ({ initialValues, packageList, edit }) => {
   const createTraineeForm = useForm<ICreateTraineeFormValues>({
     initialValues: {
       firstName: "",
@@ -39,7 +40,26 @@ const TraineeForm: React.FC<ITraineeForm> = ({ initialValues, packageList }) => 
     },
   });
 
-  const handleSubmit = createTraineeForm.onSubmit((values) => console.log(values));
+  //
+  const handleSubmit = createTraineeForm.onSubmit((values) => {
+    console.log(values);
+    const transFormedRequestData: Partial<ICreateTraineeFormValues> = {
+      firstName: values.firstName,
+      lastName: values.lastName,
+      mobileNumber: values.mobileNumber,
+      monthlyFee: values.monthlyFee,
+      subscriptionType: values.subscriptionType === "monthly" ? 0 : 1,
+      subscriptionPackageID:
+        values.subscriptionType === "package" && values.subscriptionPackageID
+          ? values.subscriptionPackageID
+          : "",
+      paidAmount: values.paidAmount,
+      registrationFee: values.registrationFee,
+      totalAmount: values.totalAmount,
+    };
+    console.log(transFormedRequestData);
+  });
+
   useLayoutEffect(() => {
     if (initialValues) {
       createTraineeForm.setValues(initialValues);
@@ -49,12 +69,18 @@ const TraineeForm: React.FC<ITraineeForm> = ({ initialValues, packageList }) => 
   }, [initialValues]);
 
   // renders package data after selecting package option
-  const renderPackagelist = (packageList: IPackageData[]) => {
+  const renderPackagelist = (
+    packageList: IPackageData[],
+    form: UseFormReturnType<
+      ICreateTraineeFormValues,
+      (values: ICreateTraineeFormValues) => ICreateTraineeFormValues
+    >,
+  ) => {
     const availablePackagelist = (
       <Radio.Group
         label="select a package type"
         withAsterisk
-        {...createTraineeForm.getInputProps("subscriptionPackageID")}
+        {...form.getInputProps("subscriptionPackageID")}
       >
         <Group mt="xs">
           {packageList.map((p) => (
@@ -68,6 +94,7 @@ const TraineeForm: React.FC<ITraineeForm> = ({ initialValues, packageList }) => 
 
   return (
     <Box mx="auto" miw={300} className="sm:space-y-4 md:space-y-6">
+      {/* genaral info */}
       <Fieldset legend="Member information">
         <TextInput
           label="First Name"
@@ -107,7 +134,7 @@ const TraineeForm: React.FC<ITraineeForm> = ({ initialValues, packageList }) => 
         </Radio.Group>
         <div className="py-2">
           {packageList && createTraineeForm.values.subscriptionType === "package"
-            ? renderPackagelist(packageList)
+            ? renderPackagelist(packageList, createTraineeForm)
             : null}
         </div>
       </Fieldset>
@@ -130,8 +157,9 @@ const TraineeForm: React.FC<ITraineeForm> = ({ initialValues, packageList }) => 
           {...createTraineeForm.getInputProps("paidAmount")}
         />
       </Fieldset>
+
       <Button className="mt-4" variant="filled" onClick={() => handleSubmit()}>
-        Create New Member
+        {edit ? "Update " : "Create New Member"}
       </Button>
     </Box>
   );
