@@ -1,10 +1,12 @@
 import BreadCrumb from "@/components/breadcrumb/BreadCrumb";
 import TraineeListData from "@/components/trainee/TraineeList";
 import routepaths from "@/libs/routepaths";
-import { ChangeEventHandler, FC, useState } from "react";
+import { ChangeEvent, FC, useState } from "react";
 import { Pagination, TextInput, rem } from "@mantine/core";
 import { IconSearch } from "@tabler/icons-react";
 import { useGetTraineeListQuery } from "@/features/trainee/traineeAPI";
+import { useNavigate } from "react-router-dom";
+import AddNewBtn from "@/components/common/buttons/AddNewBtn/AddNewBtn";
 
 const TraineeListPageBreadcrumb = [
   {
@@ -19,9 +21,10 @@ const TraineeListPageBreadcrumb = [
 const TraineeList: FC = () => {
   const [activePage, setPage] = useState(1);
   const [search, setSearch] = useState("");
+  const navigate = useNavigate();
   const { data: trainees, isError, isLoading, error } = useGetTraineeListQuery();
   //
-  const handleSearchChange = (event: ChangeEventHandler<HTMLInputElement>) => {
+  const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.currentTarget;
     setSearch(value);
   };
@@ -29,7 +32,8 @@ const TraineeList: FC = () => {
   console.log({ trainees, isError, isLoading, error });
   // TODO implement search function here
   //
-  //
+
+  //conditonal rendering based on data
   if (isLoading) return <div>Loading...</div>;
   //
   if (error) return <div>Error while loading Retry later</div>;
@@ -39,8 +43,10 @@ const TraineeList: FC = () => {
   return (
     <div>
       <BreadCrumb items={TraineeListPageBreadcrumb} />
-      <div className="h-full w-full p-4 md:p-8">
+
+      <div className="h-full w-full space-y-2 p-4 md:p-8">
         {/* search item */}
+
         <TextInput
           placeholder="Search by any field"
           mb="md"
@@ -48,8 +54,9 @@ const TraineeList: FC = () => {
           value={search}
           onChange={handleSearchChange} // figure out why is this happing
         />
-
+        <AddNewBtn routepath={routepaths.add_trainee} />
         <TraineeListData trainees={trainees} />
+
         {/* pagination */}
         <div className="flex w-full flex-row items-center justify-center px-8 py-4">
           <Pagination value={activePage} onChange={setPage} total={10} />

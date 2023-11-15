@@ -33,6 +33,7 @@ export interface IUpdatePackageRequestData extends ICreatePackageRequestData {
 }
 // trainee or member types
 export interface ITraineeData {
+  _id: string;
   firstname: string;
   lastname: string;
   phone: number;

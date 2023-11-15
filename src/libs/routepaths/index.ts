@@ -4,12 +4,13 @@ export default {
   dashboard: "/dashboard",
   //
   trainer: "/trainer",
-  trainer_create: "/trainer/add-new",
+  add_trainer: "/trainer/add-new",
   trainer_details: (id: string) => `/trainer/${id}`,
   //
   trainee: "/trainee",
-  trainee_create: "/trainee/add-new",
+  add_trainee: "/trainee/add-new",
   trainee_details: (id: string) => `/trainee/${id}`,
+  edit_trainee: (id: string) => `/trainee/edit/${id}`,
   //
   diet: "/diet",
   diet_create: `/diet/create-diet`,

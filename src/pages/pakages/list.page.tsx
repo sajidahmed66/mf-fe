@@ -2,10 +2,10 @@ import BreadCrumb from "@/components/breadcrumb/BreadCrumb";
 import PackageList from "@/components/package/PackageList";
 import { useDeletePackageMutation, useGetPackagesQuery } from "@/features/packages/packageAPI";
 import routepaths from "@/libs/routepaths";
-import { Button, Text } from "@mantine/core";
+import { Text } from "@mantine/core";
 import { FC } from "react";
-import { useNavigate } from "react-router-dom";
 import { modals } from "@mantine/modals";
+import AddNewBtn from "@/components/common/buttons/AddNewBtn/AddNewBtn";
 const PackageListPageBreadcrumb = [
   {
     label: "Dashboard",
@@ -17,7 +17,6 @@ const PackageListPageBreadcrumb = [
 ];
 
 const PackageListPage: FC = () => {
-  const navigate = useNavigate();
   const { data: packageData, isLoading, error } = useGetPackagesQuery();
   const [deletePackage, result] = useDeletePackageMutation();
   //
@@ -47,11 +46,7 @@ const PackageListPage: FC = () => {
     <div>
       <BreadCrumb items={PackageListPageBreadcrumb} />
       <div className="h-full w-full p-4 md:p-8">
-        <div className="h-22 flex w-full flex-row items-center justify-end">
-          <Button variant="filled" onClick={() => navigate(routepaths.add_package)}>
-            Add New
-          </Button>
-        </div>
+        <AddNewBtn routepath={routepaths.add_package} />
         <PackageList data={packageData} deletePackage={HandleDeletePackage} />
       </div>
     </div>
