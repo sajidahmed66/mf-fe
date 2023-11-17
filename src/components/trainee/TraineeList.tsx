@@ -1,8 +1,8 @@
 import { Table } from "@mantine/core";
 import { ITraineeData } from "@/libs/types";
 import { FC } from "react";
-import EditDeleteBtnGrp from "@/components/common/buttons/table-action-btn-grp/EditDeleteBtnGrp";
-import routepaths from "@/libs/routepaths";
+// import EditDeleteBtnGrp from "@/components/common/buttons/table-action-btn-grp/EditDeleteBtnGrp";
+// import routepaths from "@/libs/routepaths";
 import { convertedDate } from "@/libs/utils/date";
 
 interface ITraineeListDataProps {
@@ -16,7 +16,7 @@ const TraineeListData: FC<ITraineeListDataProps> = ({ trainees }) => {
       <Table.Td>{dt.lastname}</Table.Td>
       <Table.Td>{dt.phone}</Table.Td>
       <Table.Td>{convertedDate(dt.entryDate)}</Table.Td>
-      <EditDeleteBtnGrp handleDelete={() => {}} routepathFn={routepaths.edit_trainee} id={dt._id} />
+      {/* <EditDeleteBtnGrp handleDelete={() => {}} routepathFn={routepaths.edit_trainee} id={dt._id} /> */}
     </Table.Tr>
   ));
   return (
