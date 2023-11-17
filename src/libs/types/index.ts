@@ -24,14 +24,14 @@ export interface IPackageFromProps {
   id?: string;
 }
 
-// Package Api Data transfer object model
+// Package Api Data transfer object model //
 export interface ICreatePackageRequestData {
   data: Omit<IPackageData, "_id" | "date" | "entryBy">;
 }
 export interface IUpdatePackageRequestData extends ICreatePackageRequestData {
   id: string;
 }
-// trainee or member types
+// trainee or member types //
 export interface ITraineeData {
   _id: string;
   firstname: string;
@@ -48,8 +48,31 @@ export interface ITraineeData {
   // paidAmount: number;
 }
 // export interface ITraineeRes
-export interface ITrainerData {}
 
-export interface IWorkoutData {}
+//  TRAINER //
+export interface ITrianerData {
+  firstname: string;
+  lastname: string;
+  phone: number;
+}
+export interface ICreateTrainerRequestData extends ITrianerData {}
 
-export interface IDietData {}
+export interface ITrainerResponsetData extends ITrianerData {
+  _id: string;
+}
+
+/// WORKOUTS
+export interface IWorkoutData {
+  _id: string;
+  name: string;
+  description?: string;
+}
+
+///DIET
+export interface IDietData {
+  _id: string;
+  name: string;
+  quantity: number;
+  unit: string;
+  calorie: number;
+}

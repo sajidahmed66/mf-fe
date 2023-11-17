@@ -31,21 +31,22 @@ const traineeAPI = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["Trainee"],
     }),
-    updateTrainee: builder.mutation<ITraineeData, { data: ITraineeData; id: string }>({
-      query: ({ data, id }) => ({
-        url: `/admin/trainees/${id}`,
-        method: "PUT",
-        body: data,
-      }),
-      invalidatesTags: ["Trainee"],
-    }),
-    deleteTrainee: builder.mutation({
-      query: (id) => ({
-        url: `/admin/trainees/${id}`,
-        method: "DELETE",
-      }),
-      invalidatesTags: ["Trainee"],
-    }),
+    // not available will be added later
+    // updateTrainee: builder.mutation<ITraineeData, { data: ITraineeData; id: string }>({
+    //   query: ({ data, id }) => ({
+    //     url: `/admin/trainees/${id}`,
+    //     method: "PUT",
+    //     body: data,
+    //   }),
+    //   invalidatesTags: ["Trainee"],
+    // }),
+    // deleteTrainee: builder.mutation({
+    //   query: (id) => ({
+    //     url: `/admin/trainees/${id}`,
+    //     method: "DELETE",
+    //   }),
+    //   invalidatesTags: ["Trainee"],
+    // }),
   }),
 });
 
@@ -53,6 +54,6 @@ export const {
   useGetTraineeListQuery,
   useCreateTraineeMutation,
   useGetTraineeByIdQuery,
-  useUpdateTraineeMutation,
-  useDeleteTraineeMutation,
+  // useUpdateTraineeMutation,
+  // useDeleteTraineeMutation,
 } = traineeAPI;
