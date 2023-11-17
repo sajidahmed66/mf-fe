@@ -1,45 +1,72 @@
 import React, { useLayoutEffect } from "react";
-import { useForm } from "@mantine/form";
+import { UseFormReturnType, useForm } from "@mantine/form";
 import { Box, NumberInput, TextInput, Fieldset, Radio, Group, Button } from "@mantine/core";
 import { validateName } from "@/libs/validators";
 import { IPackageData } from "@/libs/types";
-interface ICreateTraineeFormValues {
-  firstName: string;
-  lastName: string;
-  mobileNumber: string;
-  registrationFee: number;
-  subscriptionType: string;
-  subscriptionPackageID?: string;
-  monthlyFee: number;
+import { useGetPackagesQuery } from "@/features/packages/packageAPI";
+import { useCreateTraineeMutation } from "@/features/trainee/traineeAPI";
+
+export interface ICreateTraineeFormValues {
+  firstname: string;
+  lastname: string;
+  phone: string;
+  registrationAmount: number;
+  subscriptionType: "1" | "2" | 1 | 2;
+  packageType?: string; // this option only pops up if the subscription type is package
   totalAmount: number;
   paidAmount: number;
+  subscriptionAmount?: number;
+  // paidAmount
 }
 
-interface ITraineeForm {
-  initialValues?: ICreateTraineeFormValues | undefined;
-  packageList?: IPackageData[];
+export interface ITraineeFormProps {
+  initialValues?: ICreateTraineeFormValues;
+  edit: boolean;
+  id?: string;
 }
 
-const TraineeForm: React.FC<ITraineeForm> = ({ initialValues, packageList }) => {
+const TraineeForm: React.FC<ITraineeFormProps> = ({ initialValues, edit, id }) => {
+  const { data: packageList, isError: isPackageError, error: packageError } = useGetPackagesQuery();
+  const [createTrainee, result] = useCreateTraineeMutation();
+  console.log(result);
   const createTraineeForm = useForm<ICreateTraineeFormValues>({
     initialValues: {
-      firstName: "",
-      lastName: "",
-      mobileNumber: "",
-      monthlyFee: 0,
-      registrationFee: 0,
+      firstname: "",
+      lastname: "",
+      phone: "",
+      registrationAmount: 0,
       paidAmount: 0,
-      subscriptionType: "",
+      subscriptionType: "1",
       totalAmount: 0,
-      subscriptionPackageID: "",
+      packageType: "",
+      subscriptionAmount: 0,
     },
 
     validate: {
-      firstName: (value) => (validateName(value) ? null : "name must"),
+      firstname: (value) => (validateName(value) ? null : "name must"),
     },
   });
 
-  const handleSubmit = createTraineeForm.onSubmit((values) => console.log(values));
+  //
+  const handleSubmit = createTraineeForm.onSubmit((values) => {
+    console.log(values);
+    const transFormedRequestData: Partial<ICreateTraineeFormValues> = {
+      firstname: values.firstname,
+      lastname: values.lastname,
+      phone: values.phone,
+      subscriptionType: values.subscriptionType === "1" ? 1 : 2,
+      packageType: values.subscriptionType === "2" && values.packageType ? values.packageType : "",
+      paidAmount: values.paidAmount,
+      registrationAmount: values.registrationAmount,
+      totalAmount: values.totalAmount,
+      subscriptionAmount: values.subscriptionAmount,
+    };
+    console.log(transFormedRequestData);
+    if (!edit) {
+      createTrainee(transFormedRequestData);
+    }
+  });
+
   useLayoutEffect(() => {
     if (initialValues) {
       createTraineeForm.setValues(initialValues);
@@ -49,13 +76,15 @@ const TraineeForm: React.FC<ITraineeForm> = ({ initialValues, packageList }) => 
   }, [initialValues]);
 
   // renders package data after selecting package option
-  const renderPackagelist = (packageList: IPackageData[]) => {
+  const renderPackagelist = (
+    packageList: IPackageData[],
+    form: UseFormReturnType<
+      ICreateTraineeFormValues,
+      (values: ICreateTraineeFormValues) => ICreateTraineeFormValues
+    >,
+  ) => {
     const availablePackagelist = (
-      <Radio.Group
-        label="select a package type"
-        withAsterisk
-        {...createTraineeForm.getInputProps("subscriptionPackageID")}
-      >
+      <Radio.Group label="select a package type" withAsterisk {...form.getInputProps("packageType")}>
         <Group mt="xs">
           {packageList.map((p) => (
             <Radio value={p._id} label={p.name} />
@@ -65,24 +94,24 @@ const TraineeForm: React.FC<ITraineeForm> = ({ initialValues, packageList }) => 
     );
     return availablePackagelist;
   };
-
   return (
     <Box mx="auto" miw={300} className="sm:space-y-4 md:space-y-6">
+      {/* genaral info */}
       <Fieldset legend="Member information">
         <TextInput
           label="First Name"
           placeholder="First Name"
-          {...createTraineeForm.getInputProps("firstName")}
+          {...createTraineeForm.getInputProps("firstname")}
         />
         <TextInput
           label="Last Name"
           placeholder="Last Name"
-          {...createTraineeForm.getInputProps("lastName")}
+          {...createTraineeForm.getInputProps("lastname")}
         />
         <TextInput
           label="Phone Number"
           placeholder="Enter your phone number"
-          {...createTraineeForm.getInputProps("mobileNumber")}
+          {...createTraineeForm.getInputProps("phone")}
         />
       </Fieldset>
 
@@ -93,7 +122,7 @@ const TraineeForm: React.FC<ITraineeForm> = ({ initialValues, packageList }) => 
           allowDecimal={false}
           placeholder="Registration fee"
           min={0}
-          {...createTraineeForm.getInputProps("registrationFee")}
+          {...createTraineeForm.getInputProps("registrationAmount")}
         />
         <Radio.Group
           label="Choose Subscription type"
@@ -101,13 +130,14 @@ const TraineeForm: React.FC<ITraineeForm> = ({ initialValues, packageList }) => 
           {...createTraineeForm.getInputProps("subscriptionType")}
         >
           <Group mt="xs">
-            <Radio value="monthly" label="Monthly" />
-            <Radio value="package" label="Package" />
+            <Radio value={"1"} label="Monthly" />
+            <Radio value={"2"} label="Package" />
           </Group>
         </Radio.Group>
+        {/* todo */}
         <div className="py-2">
-          {packageList && createTraineeForm.values.subscriptionType === "package"
-            ? renderPackagelist(packageList)
+          {packageList && createTraineeForm.values.subscriptionType === "2"
+            ? renderPackagelist(packageList, createTraineeForm)
             : null}
         </div>
       </Fieldset>
@@ -130,8 +160,9 @@ const TraineeForm: React.FC<ITraineeForm> = ({ initialValues, packageList }) => 
           {...createTraineeForm.getInputProps("paidAmount")}
         />
       </Fieldset>
+
       <Button className="mt-4" variant="filled" onClick={() => handleSubmit()}>
-        Create New Member
+        {edit ? "Update " : "Create New Member"}
       </Button>
     </Box>
   );

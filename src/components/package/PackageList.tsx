@@ -1,10 +1,11 @@
 import { IPackageData } from "@/libs/types";
-import { IconEdit, IconTrash } from "@tabler/icons-react";
-import { Button, Table } from "@mantine/core";
+
+import { Table } from "@mantine/core";
 import { FC } from "react";
 import { convertedDate } from "@/libs/utils/date";
-import { useNavigate } from "react-router-dom";
+
 import routepaths from "@/libs/routepaths";
+import EditDeleteBtnGrp from "@/components/common/buttons/table-action-btn-grp/EditDeleteBtnGrp";
 
 interface IPackageListProps {
   data: IPackageData[];
@@ -12,8 +13,6 @@ interface IPackageListProps {
 }
 
 const PackageList: FC<IPackageListProps> = ({ data, deletePackage }) => {
-  const navigate = useNavigate();
-
   const handleDeletePackage = (id: string) => {
     deletePackage(id);
   };
@@ -24,23 +23,7 @@ const PackageList: FC<IPackageListProps> = ({ data, deletePackage }) => {
       <Table.Td>{p.time_duration}</Table.Td>
       <Table.Td>{convertedDate(p.date)}</Table.Td>
       <Table.Td>{p.entryBy.firstname + " " + p.entryBy.lastname}</Table.Td>
-
-      <Table.Td>
-        <Button.Group>
-          <Button variant="default" onClick={() => navigate(routepaths.edit_package(p._id))}>
-            <IconEdit size={18} />
-          </Button>
-          <Button
-            variant="default"
-            bg={"red"}
-            onClick={() => {
-              handleDeletePackage(p._id);
-            }}
-          >
-            <IconTrash size={18} />
-          </Button>
-        </Button.Group>
-      </Table.Td>
+      <EditDeleteBtnGrp handleDelete={handleDeletePackage} id={p._id} routepathFn={routepaths.edit_package} />
     </Table.Tr>
   ));
 

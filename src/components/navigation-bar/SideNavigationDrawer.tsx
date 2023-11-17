@@ -14,7 +14,7 @@ const adminNavigationLinks: LinksGroupProps[] = [
     icon: IconGauge,
     links: [
       { label: "list", link: routepaths.trainer },
-      { label: "add new", link: routepaths.trainer_create },
+      { label: "add new", link: routepaths.add_trainer },
     ],
   },
   {
@@ -22,7 +22,7 @@ const adminNavigationLinks: LinksGroupProps[] = [
     icon: IconGauge,
     links: [
       { label: "list", link: routepaths.trainee },
-      { label: "add new", link: routepaths.trainee_create },
+      { label: "add new", link: routepaths.add_trainee },
     ],
   },
   {

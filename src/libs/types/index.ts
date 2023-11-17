@@ -24,28 +24,55 @@ export interface IPackageFromProps {
   id?: string;
 }
 
-// Package Api Data transfer object model
+// Package Api Data transfer object model //
 export interface ICreatePackageRequestData {
   data: Omit<IPackageData, "_id" | "date" | "entryBy">;
 }
 export interface IUpdatePackageRequestData extends ICreatePackageRequestData {
   id: string;
 }
-// trainee or member types
+// trainee or member types //
 export interface ITraineeData {
+  _id: string;
   firstname: string;
   lastname: string;
   phone: number;
   subscriptionType: number;
-  packageType: string;
-  totalAmount: number;
-  registrationAmount: number;
-  subscriptionAmount: number;
-  paidAmount: number;
+  userRole: number;
+  entryDate: Date;
+  currentPaymentDate: Date;
+  // packageType: string;
+  // totalAmount: number;
+  // registrationAmount: number;
+  // subscriptionAmount: number;
+  // paidAmount: number;
+}
+// export interface ITraineeRes
+
+//  TRAINER //
+export interface ITrianerData {
+  firstname: string;
+  lastname: string;
+  phone: number;
+}
+export interface ICreateTrainerRequestData extends ITrianerData {}
+
+export interface ITrainerResponsetData extends ITrianerData {
+  _id: string;
 }
 
-export interface ITrainerData {}
+/// WORKOUTS
+export interface IWorkoutData {
+  _id: string;
+  name: string;
+  description?: string;
+}
 
-export interface IWorkoutData {}
-
-export interface IDietData {}
+///DIET
+export interface IDietData {
+  _id: string;
+  name: string;
+  quantity: number;
+  unit: string;
+  calorie: number;
+}
