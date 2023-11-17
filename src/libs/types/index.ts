@@ -47,7 +47,7 @@ export interface ITraineeData {
   // subscriptionAmount: number;
   // paidAmount: number;
 }
-
+// export interface ITraineeRes
 export interface ITrainerData {}
 
 export interface IWorkoutData {}

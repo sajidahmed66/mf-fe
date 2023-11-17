@@ -24,13 +24,13 @@ const EditTraineePage: FC = () => {
   const { id } = useParams();
 
   const { data: traineeData, isLoading, isError, error } = useGetTraineeByIdQuery(`${id}`);
-  const { data: packageData } = useGetPackagesQuery();
+
   console.log({ traineeData, isLoading, isError, error });
   return (
     <>
       <BreadCrumb items={traineeEditPageBreadcrumb} />
       <div className="h-full w-full p-4 md:p-8">
-        <TraineeForm initialvalues={traineeData} packageList={packageData} edit={true} id={`${id}`} />
+        <TraineeForm edit={true} id={`${id}`} />
       </div>
     </>
   );

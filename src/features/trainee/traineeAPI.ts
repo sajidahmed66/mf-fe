@@ -1,3 +1,4 @@
+import { ICreateTraineeFormValues } from "@/components/trainee/TraineeForm";
 import apiSlice from "@/features/api/apiSlice";
 import { ITraineeData } from "@/libs/types";
 
@@ -11,15 +12,19 @@ const traineeAPI = apiSlice.injectEndpoints({
       providesTags: ["Trainee"],
       //   onQueryStarted,
     }),
-    getTraineeById: builder.query({
+    getTraineeById: builder.query<ITraineeData, string>({
       query: (id) => ({
         url: `/admin/trainees/${id}`,
         method: "GET",
       }),
+      // transformResponse: (response: { data: ITraineeData }, meta, arg) => {
+      //   const { _id, firstname, lastname, phone } = response.data;
+      //   // return {}
+      // },
       providesTags: ["Trainee"],
     }),
     createTrainee: builder.mutation({
-      query: (data: ITraineeData) => ({
+      query: (data: Partial<ICreateTraineeFormValues>) => ({
         url: "/admin/trainees",
         method: "POST",
         body: data,
