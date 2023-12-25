@@ -43,6 +43,8 @@ const apiSlice = createApi({
     "Payment-Trainee",
     "Products",
     "ProductSells",
+    "Profile",
+    "Review",
   ],
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

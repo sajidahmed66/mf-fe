@@ -8,6 +8,7 @@ const apiRoutes = {
   //trainee diets
   traineeDiets: "/admin/traineeDiets",
   traineeDietById: (id: string) => `/admin/traineeDiets/${id}`,
+
   // exercies endpoints
   exercises: "/admin/exercises",
   exercisesByID: (id: string) => `/admin/exercises/${id}`,
@@ -17,15 +18,19 @@ const apiRoutes = {
   // trainee exercise requests
   traineeExercises: "/admin/traineeExercises",
   traineeExerciseById: (id: string) => `/admin/traineeExercises/${id}`,
+
   //expense endpoints
   expenses: "/admin/expenses",
   expenseById: (id: string) => `/admin/expenses/${id}`,
+
   //installments
   installments: "/admin/installments",
   //   installmentById: (id: string) => `/admin/installments/${id}`,
+
   //messages endpoints this might be just notice message
   messages: "/admin/messages",
   messageById: (id: string) => `/admin/messages/${id}`,
+
   //payments endpoints trainee and employers
   payments: "/admin/payments",
   paymentById: (id: string) => `/admin/payments/${id}`,
@@ -34,17 +39,20 @@ const apiRoutes = {
   //trainer payment
   paymentTrainer: "/admin/trainerPayments/",
   paymentTrainerByID: (id: string) => `/admin/trainerPayments/${id}`,
+
   //products
   products: "/admin/products",
   productById: (id: string) => `/admin/products/${id}`,
   //products sells
-  peoductSells: "/admin/productSells",
-  productSellById: (id: string) => `/admin/productSells/${id}`,
+  productSells: "/admin/productSells", // gets the list of sells orders
+  productSellById: (id: string) => `/admin/productSells/${id}`, // gets the list of total sell of a singular product
+
   //   profile
   profiledetails: "/admin/profile/me",
   updateProfile: "/admin/profile",
+
   //   review
-  review: "/admin/review",
+  review: "/admin/reviews",
 };
 
 export default apiRoutes;
