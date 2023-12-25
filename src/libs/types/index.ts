@@ -1,3 +1,8 @@
+interface UserObj {
+  _id?: string;
+  firstname: string;
+  lastname: string;
+}
 // package types
 export interface IPackageData {
   _id: string;
@@ -62,12 +67,15 @@ export interface ITrainerResponsetData extends ITrianerData {
 }
 
 /// WORKOUTS
-export interface IWorkoutData {
+export interface IWorkoutData extends IWorkoutReqData {
   _id: string;
+  date: Date;
+  entryBy: UserObj;
+}
+export interface IWorkoutReqData {
   name: string;
   description?: string;
 }
-
 ///DIET
 export interface IDietData {
   _id: string;
