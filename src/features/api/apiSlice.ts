@@ -37,6 +37,7 @@ const apiSlice = createApi({
     "ExerciseReqLimit",
     "TraineeExerciseReq",
     "Expense",
+    "Installment",
   ],
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
