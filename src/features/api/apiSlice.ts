@@ -32,9 +32,11 @@ const apiSlice = createApi({
     "Trainee",
     "Diet",
     "DietReqLimit",
+    "TraineeDietReq",
     "Exercise",
-    "ExerciseLimitReq",
+    "ExerciseReqLimit",
     "TraineeExerciseReq",
+    "Expense",
   ],
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

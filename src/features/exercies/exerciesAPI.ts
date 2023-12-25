@@ -45,7 +45,7 @@ const exercisesAPI = apiSlice.injectEndpoints({
         url: apiRoutes.exerciseReqLimits,
         method: "GET",
       }),
-      providesTags: ["ExerciseLimitReq"],
+      providesTags: ["ExerciseReqLimit"],
     }),
     createExerciseLimit: builder.mutation({
       query: (data: any) => ({
@@ -53,7 +53,7 @@ const exercisesAPI = apiSlice.injectEndpoints({
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["ExerciseLimitReq"],
+      invalidatesTags: ["ExerciseReqLimit"],
     }),
     updateExerciseLimit: builder.mutation<any, { data: any; id: string }>({
       query: ({ data, id }) => ({
@@ -61,14 +61,14 @@ const exercisesAPI = apiSlice.injectEndpoints({
         method: "PUT",
         body: data,
       }),
-      invalidatesTags: ["ExerciseLimitReq"],
+      invalidatesTags: ["ExerciseReqLimit"],
     }),
     deleteExerciseLimit: builder.mutation({
       query: (id: string) => ({
         url: apiRoutes.exerciseReqLimitsByID(id),
         method: "DELETE",
       }),
-      invalidatesTags: ["ExerciseLimitReq"],
+      invalidatesTags: ["ExerciseReqLimit"],
     }),
     // trainee exercise requests these are bacially workoutPlan we need to update
     getTraineeExercises: builder.query({
