@@ -1,7 +1,7 @@
 import BreadCrumb from "@/components/breadcrumb/BreadCrumb";
+import WorkoutForm from "@/components/workout/WorkoutForm";
 import routepaths from "@/libs/routepaths";
 import { FC } from "react";
-
 
 const workoutCreatePageBreadcrumb = [
   {
@@ -17,11 +17,11 @@ const workoutCreatePageBreadcrumb = [
     // link: routepaths.workout_create,
   },
 ];
-const CreateWorkout:FC = () => {
+const CreateWorkout: FC = () => {
   return (
     <div>
       <BreadCrumb items={workoutCreatePageBreadcrumb} />
-      CreateWorkout
+      <WorkoutForm />
     </div>
   );
 };
