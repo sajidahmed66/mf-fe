@@ -30,6 +30,7 @@ const PackageForm: FC<IPackageFromProps> = ({ initialvalues, edit, id }) => {
       time_duration: 0,
     },
     validate: {
+      // TODO need to add valodation
       name: (value) => (validateName(value) ? null : "cannot be empty"),
     },
   });

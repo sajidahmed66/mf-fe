@@ -2,8 +2,6 @@ import BreadCrumb from "@/components/breadcrumb/BreadCrumb";
 import routepaths from "@/libs/routepaths";
 import { FC } from "react";
 
-
-
 const workoutListPageBreadcrumb = [
   {
     label: "Dashboard",
@@ -19,11 +17,13 @@ const workoutListPageBreadcrumb = [
   // },
 ];
 
-
-const WorkoutList: FC  = () => {
-  return <div>
-    <BreadCrumb items={workoutListPageBreadcrumb} />
-    WorkoutList</div>;
+const WorkoutList: FC = () => {
+  return (
+    <div>
+      <BreadCrumb items={workoutListPageBreadcrumb} />
+      <p>WorkoutList</p>
+    </div>
+  );
 };
 
 export default WorkoutList;
