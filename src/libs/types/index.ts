@@ -23,7 +23,7 @@ export interface IPackageForm {
   time_duration: number;
 }
 // from component props type
-export interface IPackageFromProps {
+export interface IPackageFormProps {
   initialvalues?: Pick<IPackageData, "name" | "amount" | "time_duration">;
   edit: boolean;
   id?: string;
@@ -74,8 +74,14 @@ export interface IWorkoutData extends IWorkoutReqData {
 }
 export interface IWorkoutReqData {
   name: string;
-  description?: string;
+  description: string;
 }
+export interface IWorkoutFormProps {
+  initialvalues?: Pick<IWorkoutData, "name" | "description">;
+  edit: boolean;
+  id?: string;
+}
+
 ///DIET
 export interface IDietData {
   _id: string;

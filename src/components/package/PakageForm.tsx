@@ -1,7 +1,7 @@
 import { FC, useEffect } from "react";
 import { Box, Button, Fieldset, LoadingOverlay, NumberInput, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import { IPackageForm, IPackageFromProps } from "@/libs/types";
+import { IPackageForm, IPackageFormProps } from "@/libs/types";
 import { validateName } from "@/libs/validators";
 import { useCreatePackagesMutation, useUpdatePackageMutation } from "@/features/packages/packageAPI";
 import _ from "lodash";
@@ -13,7 +13,7 @@ import {
   updateSuccessNotificationDtails,
 } from "@/libs/constants/toast-notificaton";
 
-const PackageForm: FC<IPackageFromProps> = ({ initialvalues, edit, id }) => {
+const PackageForm: FC<IPackageFormProps> = ({ initialvalues, edit, id }) => {
   // create api query
   const [createPackage, { isLoading: isCLoading, isError: isCError, isSuccess: isCSuccess }] =
     useCreatePackagesMutation();

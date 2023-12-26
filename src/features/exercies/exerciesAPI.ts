@@ -113,4 +113,10 @@ const exercisesAPI = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useGetExercisesLisQuery, useCreateExerciseMutation, useUpdateExerciseMutation } = exercisesAPI;
+export const {
+  useGetExercisesLisQuery,
+  useGetExerciesByIdQuery,
+  useDeleteExerciseMutation,
+  useCreateExerciseMutation,
+  useUpdateExerciseMutation,
+} = exercisesAPI;

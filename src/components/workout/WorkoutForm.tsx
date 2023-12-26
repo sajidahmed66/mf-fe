@@ -1,21 +1,28 @@
 import NotificationAlert from "@/components/common/notification";
 import { useCreateExerciseMutation, useUpdateExerciseMutation } from "@/features/exercies/exerciesAPI";
 import {
+  createErrorNotificationDetails,
   createSuccessNotificationDetails,
   updateErrorNotificationDetails,
+  updateSuccessNotificationDtails,
 } from "@/libs/constants/toast-notificaton";
+import { IWorkoutFormProps } from "@/libs/types";
 import { validateName } from "@/libs/validators";
-import { Box, Button, Fieldset, TextInput, Textarea } from "@mantine/core";
+import { Box, Button, Fieldset, LoadingOverlay, TextInput, Textarea } from "@mantine/core";
 import { useForm } from "@mantine/form";
+import _ from "lodash";
+import { FC, useEffect } from "react";
 
 interface IWorkoutForm {
   name: string;
   description: string;
 }
-const WorkoutForm = () => {
+
+const WorkoutForm: FC<IWorkoutFormProps> = ({ edit, id, initialvalues }) => {
   const [createWorkout, { isLoading: isCLoading, isError: isCError, isSuccess: isCSuccess }] =
     useCreateExerciseMutation();
-  // const [updateWorkout,{}]=useUpdateExerciseMutation()
+  const [updateWorkout, { isLoading: isULoading, isError: isUError, isSuccess: isUSuccess }] =
+    useUpdateExerciseMutation();
   const workoutForm = useForm<IWorkoutForm>({
     initialValues: {
       name: "",
@@ -27,16 +34,30 @@ const WorkoutForm = () => {
     },
   });
 
+  useEffect(() => {
+    if (initialvalues) {
+      workoutForm.setValues(initialvalues);
+      workoutForm.resetDirty(initialvalues);
+    }
+  }, [initialvalues]);
+
   const handleSubmit = workoutForm.onSubmit((values) => {
-    createWorkout(values);
+    if (id && id !== "") {
+      updateWorkout({ id: id, data: _.pick(values, ["name", "description"]) });
+    } else {
+      createWorkout(values);
+    }
   });
   return (
     <>
-      <Box>
+      <Box className="my-4">
         {isCSuccess && <NotificationAlert {...createSuccessNotificationDetails} />}
-        {isCError && <NotificationAlert {...updateErrorNotificationDetails} />}
+        {isUSuccess && <NotificationAlert {...updateSuccessNotificationDtails} />}
+        {isUError && <NotificationAlert {...updateErrorNotificationDetails} />}
+        {isCError && <NotificationAlert {...createErrorNotificationDetails} />}
       </Box>
-      <Box>
+      <Box mx={"auto"} miw={300} className="sm:space-y-4 md:space-y-6" pos={"relative"}>
+        <LoadingOverlay visible={isULoading} zIndex={1000} overlayProps={{ radius: "sm", blur: 2 }} />
         <Fieldset legend="Workout Details">
           <TextInput
             label="Workout Name"
@@ -50,13 +71,13 @@ const WorkoutForm = () => {
           />
         </Fieldset>
         <>
-          {isCLoading ? (
+          {isCLoading || isULoading ? (
             <Button loading className="mt-4" variant="filled">
-              Create New Workout
+              {!edit ? "Create New" : "Update "} Workout
             </Button>
           ) : (
             <Button className="mt-4" variant="filled" onClick={() => handleSubmit()}>
-              Create New Workout
+              {!edit ? "Create New" : "Update "} Workout
             </Button>
           )}
         </>
