@@ -51,9 +51,13 @@ const WorkoutForm: FC<IWorkoutFormProps> = ({ edit, id, initialvalues }) => {
       createWorkout(values);
       workoutForm.reset();
     }
-    // workoutForm.
-    // navigate("/workout");
   });
+
+  useEffect(() => {
+    if (!isULoading && isUSuccess) {
+      navigate("/workout");
+    }
+  }, [isULoading, isUSuccess]);
 
   return (
     <>
@@ -84,7 +88,7 @@ const WorkoutForm: FC<IWorkoutFormProps> = ({ edit, id, initialvalues }) => {
         <>
           {isCLoading || isULoading ? (
             <Button loading className="mt-4" variant="filled">
-              {!edit ? "Create New" : "Update "} Workout
+              {!edit ? "Creating New" : "Updating "} Workout
             </Button>
           ) : (
             <Button className="mt-4" variant="filled" onClick={() => handleSubmit()}>
