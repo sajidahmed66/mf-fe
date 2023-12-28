@@ -1,10 +1,10 @@
 import NotificationAlert from "@/components/common/notification";
 import { useCreateExerciseMutation, useUpdateExerciseMutation } from "@/features/exercies/exerciesAPI";
 import {
-  createErrorNotificationDetails,
-  createSuccessNotificationDetails,
-  updateErrorNotificationDetails,
-  updateSuccessNotificationDtails,
+  createSuccessWorkoutNotificationDetails,
+  createErrorWorkoutNotificationDetails,
+  updateErrorWorkoutNotificationDetails,
+  updateSuccessWorkoutNotificationDetails,
 } from "@/libs/constants/toast-notificaton";
 import { IWorkoutFormProps } from "@/libs/types";
 import { validateName } from "@/libs/validators";
@@ -58,10 +58,10 @@ const WorkoutForm: FC<IWorkoutFormProps> = ({ edit, id, initialvalues }) => {
   return (
     <>
       <Box className="my-4">
-        {isCSuccess && <NotificationAlert {...createSuccessNotificationDetails} />}
-        {isUSuccess && <NotificationAlert {...updateSuccessNotificationDtails} />}
-        {isUError && <NotificationAlert {...updateErrorNotificationDetails} />}
-        {isCError && <NotificationAlert {...createErrorNotificationDetails} />}
+        {isCSuccess && <NotificationAlert {...createSuccessWorkoutNotificationDetails} />}
+        {isUSuccess && <NotificationAlert {...updateSuccessWorkoutNotificationDetails} />}
+        {isUError && <NotificationAlert {...updateErrorWorkoutNotificationDetails} />}
+        {isCError && <NotificationAlert {...createErrorWorkoutNotificationDetails} />}
       </Box>
       <Box mx={"auto"} miw={300} className="sm:space-y-4 md:space-y-6" pos={"relative"}>
         <LoadingOverlay
