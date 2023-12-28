@@ -27,7 +27,7 @@ const WorkoutList: FC<IWorkoutListProps> = ({ data, deleteWorkout }) => {
   ));
 
   return (
-    <div>
+    <div className="overflow-x-scroll">
       <Table striped highlightOnHover>
         <Table.Thead>
           <Table.Tr>

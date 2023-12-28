@@ -14,14 +14,13 @@ const workoutCreatePageBreadcrumb = [
   },
   {
     label: "add new",
-    // link: routepaths.workout_create,
   },
 ];
 const CreateWorkout: FC = () => {
   return (
     <div>
       <BreadCrumb items={workoutCreatePageBreadcrumb} />
-      <WorkoutForm />
+      <WorkoutForm edit={false} />
     </div>
   );
 };
