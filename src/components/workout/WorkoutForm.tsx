@@ -12,6 +12,7 @@ import { Box, Button, Fieldset, LoadingOverlay, TextInput, Textarea } from "@man
 import { useForm } from "@mantine/form";
 import _ from "lodash";
 import { FC, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface IWorkoutForm {
   name: string;
@@ -23,6 +24,7 @@ const WorkoutForm: FC<IWorkoutFormProps> = ({ edit, id, initialvalues }) => {
     useCreateExerciseMutation();
   const [updateWorkout, { isLoading: isULoading, isError: isUError, isSuccess: isUSuccess }] =
     useUpdateExerciseMutation();
+  const navigate = useNavigate();
   const workoutForm = useForm<IWorkoutForm>({
     initialValues: {
       name: "",
@@ -44,10 +46,15 @@ const WorkoutForm: FC<IWorkoutFormProps> = ({ edit, id, initialvalues }) => {
   const handleSubmit = workoutForm.onSubmit((values) => {
     if (id && id !== "") {
       updateWorkout({ id: id, data: _.pick(values, ["name", "description"]) });
+      workoutForm.resetDirty(values);
     } else {
       createWorkout(values);
+      workoutForm.reset();
     }
+    // workoutForm.
+    // navigate("/workout");
   });
+
   return (
     <>
       <Box className="my-4">
@@ -57,7 +64,11 @@ const WorkoutForm: FC<IWorkoutFormProps> = ({ edit, id, initialvalues }) => {
         {isCError && <NotificationAlert {...createErrorNotificationDetails} />}
       </Box>
       <Box mx={"auto"} miw={300} className="sm:space-y-4 md:space-y-6" pos={"relative"}>
-        <LoadingOverlay visible={isULoading} zIndex={1000} overlayProps={{ radius: "sm", blur: 2 }} />
+        <LoadingOverlay
+          visible={isCLoading || isULoading}
+          zIndex={1000}
+          overlayProps={{ radius: "sm", blur: 2 }}
+        />
         <Fieldset legend="Workout Details">
           <TextInput
             label="Workout Name"
