@@ -1,26 +1,27 @@
 import apiSlice from "@/features/api/apiSlice";
-import { ICreatePackageRequestData, ITrainerResponsetData } from "@/libs/types";
+import { ITrainerData } from "@/libs/types";
 
 const trainerAPI = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getTrainerList: builder.query<ITrainerResponsetData[], void>({
+    getTrainerList: builder.query<ITrainerData[], void>({
       query: () => ({
-        url: "/admin/trainers",
+        url: "admin/trainers",
         method: "GET",
       }),
     }),
-    getTrainerById: builder.query<ITrainerResponsetData, string>({
+    getTrainerById: builder.query<ITrainerData, string>({
       query: (id) => ({
         url: `/admin/trainers${id}`,
         method: "GET",
       }),
     }),
     createTrainer: builder.mutation({
-      query: (data: ICreatePackageRequestData) => ({
-        url: `/admin/trainers`,
+      query: (data) => ({
+        url: `admin/trainers`,
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["Trainers"],
     }),
   }),
 });

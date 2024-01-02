@@ -30,6 +30,7 @@ const apiSlice = createApi({
   tagTypes: [
     "Packages",
     "Trainee",
+    "Trainers",
     "Diet",
     "DietReqLimit",
     "TraineeDietReq",
