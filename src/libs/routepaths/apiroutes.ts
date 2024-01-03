@@ -8,6 +8,9 @@ const apiRoutes = {
   //trainee diets
   traineeDiets: "/admin/traineeDiets",
   traineeDietById: (id: string) => `/admin/traineeDiets/${id}`,
+  //trainer
+  trainers: "/admin/trainers",
+  trainersById: (id: string) => `/admin/trainers/${id}`,
 
   // exercies endpoints
   exercises: "/admin/exercises",

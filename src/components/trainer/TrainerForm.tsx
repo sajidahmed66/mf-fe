@@ -8,11 +8,13 @@ import { ITrainerForm } from "@/libs/types";
 import { validateName, validateNumber } from "@/libs/validators";
 import { Box, Button, Fieldset, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import { FC } from "react";
+import { FC, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const TrainerForm: FC = () => {
   const [createTrainer, { isLoading: isCLoading, isError: isCError, isSuccess: isCSuccess }] =
     useCreateTrainerMutation();
+  const navigate = useNavigate();
 
   const createTrainerForm = useForm<ITrainerForm>({
     initialValues: {
@@ -32,6 +34,11 @@ const TrainerForm: FC = () => {
     createTrainer(values);
     createTrainerForm.reset();
   });
+  useEffect(() => {
+    if (!isCLoading && isCSuccess) {
+      navigate("/trainer");
+    }
+  }, [isCLoading, isCSuccess]);
 
   return (
     <>

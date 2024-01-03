@@ -16,7 +16,7 @@ const TrainerListData: FC<ITrainerListProps> = ({ data }) => {
     </Table.Tr>
   ));
   return (
-    <div>
+    <div className="overflow-x-scroll">
       <Table striped highlightOnHover>
         <Table.Thead>
           <Table.Tr>
