@@ -2,8 +2,10 @@ import BreadCrumb from "@/components/breadcrumb/BreadCrumb";
 import TrainerListData from "@/components/trainer/TrainerListTable";
 import { useGetTrainerListQuery } from "@/features/trainer/trainerAPI";
 import routepaths from "@/libs/routepaths";
+import { ITrainerData } from "@/libs/types";
 import { Pagination, TextInput, rem } from "@mantine/core";
 import { IconSearch } from "@tabler/icons-react";
+import { chunk } from "lodash";
 import { ChangeEventHandler, FC, useState } from "react";
 
 const trainerListPageBreadcrumb = [
@@ -21,9 +23,10 @@ const TrainerList: FC = () => {
   const { data: trainerData, isLoading, error } = useGetTrainerListQuery();
   const [activePage, setPage] = useState(1);
   // const [search, setSearch] = useState("");
-  // const handleSearchChange = (event: ChangeEventHandler<HTMLInputElement>) => {
-  //   const { value } = event.currentTarget;
+  // const handleSearchChange = (event: ) => {
+  //   const { value } = event.target.va;
   //   setSearch(value);
+  //   console.log(search);
   // };
 
   //
@@ -32,6 +35,7 @@ const TrainerList: FC = () => {
   if (error) return <div>Error while loading Retry later</div>;
   //
   if (!trainerData) return <div>No data</div>;
+  const paginatedTrainerdata = chunk(trainerData as ITrainerData[], 10);
   return (
     <div>
       <BreadCrumb items={trainerListPageBreadcrumb} />
@@ -44,9 +48,11 @@ const TrainerList: FC = () => {
           value={search}
           onChange={handleSearchChange}
         /> */}
-        <TrainerListData data={trainerData} />
+
+        <TrainerListData data={paginatedTrainerdata[activePage - 1]} />
+
         <div className="flex w-full flex-row items-center justify-center px-8 py-4">
-          <Pagination value={activePage} onChange={setPage} total={10} />
+          <Pagination value={activePage} onChange={setPage} total={paginatedTrainerdata.length} />
         </div>
       </div>
     </div>
