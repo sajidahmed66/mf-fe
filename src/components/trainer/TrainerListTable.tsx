@@ -8,7 +8,7 @@ interface ITrainerListProps {
 
 const TrainerListData: FC<ITrainerListProps> = ({ data }) => {
   const rows = data.map((dt) => (
-    <Table.Tr key={dt.firstname}>
+    <Table.Tr key={dt._id}>
       <Table.Td>{dt.firstname}</Table.Td>
       <Table.Td>{dt.lastname}</Table.Td>
       <Table.Td>{dt.phone}</Table.Td>
