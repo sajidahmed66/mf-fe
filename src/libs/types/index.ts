@@ -54,16 +54,25 @@ export interface ITraineeData {
 }
 // export interface ITraineeRes
 
-//  TRAINER //
-export interface ITrianerData {
+///////  TRAINER /////////////
+export interface ITrainerData {
+  _id: string;
+  firstname: string;
+  lastname: string;
+  phone: number;
+  userRole: number;
+  entryDate: Date;
+  currentPaymentDate: Date;
+}
+
+export interface ITrainerForm {
   firstname: string;
   lastname: string;
   phone: number;
 }
-export interface ICreateTrainerRequestData extends ITrianerData {}
 
-export interface ITrainerResponsetData extends ITrianerData {
-  _id: string;
+export interface ICreateTrainerRequestData {
+  data: Omit<ITrainerData, "_id" | "userRole" | "entryDate" | "currentPaymentDate">;
 }
 
 /// WORKOUTS
