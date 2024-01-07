@@ -6,12 +6,13 @@ import { validateName, validateNumber, validateUnit } from "@/libs/validators";
 import _ from "lodash";
 import NotificationAlert from "@/components/common/notification";
 import {
-  createErrorNotificationDetails,
-  createSuccessNotificationDetails,
-  updateErrorNotificationDetails,
-  updateSuccessNotificationDtails,
+  createSuccessDietNotificationDetails,
+  updateSuccessDietNotificationDetails,
+  updateErrorDietNotificationDetails,
+  createErrorDietNotificationDetails,
 } from "@/libs/constants/toast-notificaton";
 import { useCreateDietMutation, useUpdateDietMutation } from "@/features/diets/dietAPI";
+import { useNavigate } from "react-router-dom";
 
 const DietForm: FC<IDietFormProps> = ({ initialvalues, edit, id }) => {
   // create api query
@@ -21,6 +22,7 @@ const DietForm: FC<IDietFormProps> = ({ initialvalues, edit, id }) => {
   // update api query
   const [updateDiet, { isLoading: isULoading, isError: isUError, isSuccess: isUSuccess }] =
     useUpdateDietMutation();
+  const navigate = useNavigate();
 
   // form component
   const dietForm = useForm<IDietForm>({
@@ -47,23 +49,29 @@ const DietForm: FC<IDietFormProps> = ({ initialvalues, edit, id }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialvalues]);
 
-  const handleSubmit = dietForm.onSubmit((values) => {
+  const handleSubmit = dietForm.onSubmit(async (values) => {
     if (id && id !== "") {
       // update Diet
-      updateDiet({ id: id, data: _.pick(values, ["name", "quantity", "unit", "calorie"]) });
+      await updateDiet({ id: id, data: _.pick(values, ["name", "quantity", "unit", "calorie"]) });
+      await navigateDietList();
     } else {
       // create Diet
-      createDiet(values);
+      await createDiet(values);
+      dietForm.reset();
     }
   });
+
+  const navigateDietList = async () => {
+    navigate("/diet");
+  };
 
   return (
     <>
       <Box className="my-4">
-        {isCSuccess && <NotificationAlert {...createSuccessNotificationDetails} />}
-        {isUSuccess && <NotificationAlert {...updateSuccessNotificationDtails} />}
-        {isUError && <NotificationAlert {...updateErrorNotificationDetails} />}
-        {isCError && <NotificationAlert {...createErrorNotificationDetails} />}
+        {isCSuccess && <NotificationAlert {...createSuccessDietNotificationDetails} />}
+        {isUSuccess && <NotificationAlert {...updateSuccessDietNotificationDetails} />}
+        {isUError && <NotificationAlert {...updateErrorDietNotificationDetails} />}
+        {isCError && <NotificationAlert {...createErrorDietNotificationDetails} />}
       </Box>
       <Box mx="auto" miw={300} className="sm:space-y-4 md:space-y-6" pos="relative">
         <LoadingOverlay visible={isULoading} zIndex={1000} overlayProps={{ radius: "sm", blur: 2 }} />

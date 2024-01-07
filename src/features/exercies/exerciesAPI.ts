@@ -1,23 +1,25 @@
 import apiSlice from "@/features/api/apiSlice";
 import apiRoutes from "@/libs/routepaths/apiroutes";
+import { IWorkoutData, IWorkoutReqData } from "@/libs/types";
 
 const exercisesAPI = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getExercisesLis: builder.query({
+    getExercisesLis: builder.query<IWorkoutData[], void>({
       query: () => ({
         url: apiRoutes.exercises,
         method: "GET",
       }),
       providesTags: ["Exercise"],
     }),
-    getExerciesById: builder.query({
-      query: (id: string) => ({
+    getExerciesById: builder.query<IWorkoutData, string>({
+      query: (id) => ({
         url: apiRoutes.exercisesByID(id),
       }),
       providesTags: ["Exercise"],
     }),
-    createExercise: builder.mutation({
-      query: (data: any) => ({
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    createExercise: builder.mutation<any, IWorkoutReqData>({
+      query: (data) => ({
         url: apiRoutes.exercises,
         method: "POST",
         body: data,
@@ -111,4 +113,10 @@ const exercisesAPI = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useGetExercisesLisQuery } = exercisesAPI;
+export const {
+  useGetExercisesLisQuery,
+  useGetExerciesByIdQuery,
+  useDeleteExerciseMutation,
+  useCreateExerciseMutation,
+  useUpdateExerciseMutation,
+} = exercisesAPI;

@@ -1,19 +1,19 @@
 import { FC, useEffect } from "react";
 import { Box, Button, Fieldset, LoadingOverlay, NumberInput, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import { IPackageForm, IPackageFromProps } from "@/libs/types";
+import { IPackageForm, IPackageFormProps } from "@/libs/types";
 import { validateName } from "@/libs/validators";
 import { useCreatePackagesMutation, useUpdatePackageMutation } from "@/features/packages/packageAPI";
 import _ from "lodash";
 import NotificationAlert from "@/components/common/notification";
 import {
-  createErrorNotificationDetails,
-  createSuccessNotificationDetails,
-  updateErrorNotificationDetails,
-  updateSuccessNotificationDtails,
+  createErrorPackageNotificationDetails,
+  createSuccessPackageNotificationDetails,
+  updateErrorPackageNotificationDetails,
+  updateSuccessPackageNotificationDtails,
 } from "@/libs/constants/toast-notificaton";
 
-const PackageForm: FC<IPackageFromProps> = ({ initialvalues, edit, id }) => {
+const PackageForm: FC<IPackageFormProps> = ({ initialvalues, edit, id }) => {
   // create api query
   const [createPackage, { isLoading: isCLoading, isError: isCError, isSuccess: isCSuccess }] =
     useCreatePackagesMutation();
@@ -57,10 +57,10 @@ const PackageForm: FC<IPackageFromProps> = ({ initialvalues, edit, id }) => {
   return (
     <>
       <Box className="my-4">
-        {isCSuccess && <NotificationAlert {...createSuccessNotificationDetails} />}
-        {isUSuccess && <NotificationAlert {...updateSuccessNotificationDtails} />}
-        {isUError && <NotificationAlert {...updateErrorNotificationDetails} />}
-        {isCError && <NotificationAlert {...createErrorNotificationDetails} />}
+        {isCSuccess && <NotificationAlert {...createSuccessPackageNotificationDetails} />}
+        {isUSuccess && <NotificationAlert {...updateSuccessPackageNotificationDtails} />}
+        {isUError && <NotificationAlert {...updateErrorPackageNotificationDetails} />}
+        {isCError && <NotificationAlert {...createErrorPackageNotificationDetails} />}
       </Box>
       <Box mx="auto" miw={300} className="sm:space-y-4 md:space-y-6" pos="relative">
         <LoadingOverlay visible={isULoading} zIndex={1000} overlayProps={{ radius: "sm", blur: 2 }} />
