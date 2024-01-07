@@ -1,3 +1,8 @@
+interface UserObj {
+  _id?: string;
+  firstname: string;
+  lastname: string;
+}
 // package types
 export interface IPackageData {
   _id: string;
@@ -18,7 +23,7 @@ export interface IPackageForm {
   time_duration: number;
 }
 // from component props type
-export interface IPackageFromProps {
+export interface IPackageFormProps {
   initialvalues?: Pick<IPackageData, "name" | "amount" | "time_duration">;
   edit: boolean;
   id?: string;
@@ -62,10 +67,19 @@ export interface ITrainerResponsetData extends ITrianerData {
 }
 
 /// WORKOUTS
-export interface IWorkoutData {
+export interface IWorkoutData extends IWorkoutReqData {
   _id: string;
+  date: Date;
+  entryBy: UserObj;
+}
+export interface IWorkoutReqData {
   name: string;
-  description?: string;
+  description: string;
+}
+export interface IWorkoutFormProps {
+  initialvalues?: Pick<IWorkoutData, "name" | "description">;
+  edit: boolean;
+  id?: string;
 }
 
 ///DIET

@@ -19,6 +19,7 @@ export default {
   workout: "/workout",
   workout_create: "/workout/create-workout",
   workout_request: "/workout/requested-plan",
+  edit_workout: (id: string) => `/workout/edit/${id}`,
   // payment and packages
   packages_list: "/packages",
   add_package: "/packages/add",

@@ -29,6 +29,7 @@ import RootElement from "@/components/layout/RootElement";
 import PackageListPage from "@/pages/pakages/list.page";
 import AddPackagePage from "@/pages/pakages/add.page";
 import EditPackagePage from "@/pages/pakages/edit.page";
+import EditWorkoutPage from "@/pages/workout/edit.pages";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -56,6 +57,7 @@ const router = createBrowserRouter(
         <Route path="workout">
           <Route index element={<WorkoutList />} />
           <Route path="create-workout" element={<CreateWorkout />} />
+          <Route path="edit/:id" element={<EditWorkoutPage />} />
           <Route path="requested-plan" element={<WorkoutPlanRequests />} />
           {/* todo add more if nessary */}
         </Route>
