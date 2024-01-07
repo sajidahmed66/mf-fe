@@ -17,6 +17,11 @@ export const validateName = (value: string) => {
   return matcher.isValidSync(value);
 };
 
+export const validateUnit = (value: string) => {
+  const matcher = yup.string().min(1);
+  return matcher.isValidSync(value);
+};
+
 export const validateNumber = (value: number) => {
   const matcher = yup.number().min(1);
   return matcher.isValidSync(value);

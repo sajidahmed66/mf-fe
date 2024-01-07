@@ -56,3 +56,30 @@ export const deleteSuccessWorkoutNotificationDetails: NotificationProps = {
   title: "deleted workout successfully",
   body: "Successfully deleted Workout",
 };
+
+// notification message details for deit crud
+export const createSuccessDietNotificationDetails: NotificationProps = {
+  type: "success",
+  title: "created Diet successfully",
+  body: "Successfully created New Diet",
+};
+export const updateSuccessDietNotificationDetails: NotificationProps = {
+  type: "success",
+  title: "updated Diet successfully",
+  body: "Successfully updated Diet",
+};
+export const updateErrorDietNotificationDetails: NotificationProps = {
+  type: "error",
+  title: "failed to update Diet",
+  body: "Unable to update Diet Details",
+};
+export const createErrorDietNotificationDetails: NotificationProps = {
+  type: "error",
+  title: "failed to add Diet",
+  body: "Unable to Add New Diet Information ",
+};
+export const deleteSuccessDietNotificationDetails: NotificationProps = {
+  type: "success",
+  title: "deleted Diet successfully",
+  body: "Successfully deleted Diet",
+};

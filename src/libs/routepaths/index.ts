@@ -14,6 +14,7 @@ export default {
   //
   diet: "/diet",
   diet_create: `/diet/create-diet`,
+  diet_edit: (id: string) => `/diet/edit/${id}`,
   diet_request: "/diet/requested-plan",
   //
   workout: "/workout",

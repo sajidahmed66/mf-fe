@@ -1,9 +1,10 @@
 import apiSlice from "@/features/api/apiSlice";
 import apiRoutes from "@/libs/routepaths/apiroutes";
+import { IDietData } from "@/libs/types";
 
 const dietAPI = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getDietList: builder.query({
+    getDietList: builder.query<IDietData[], void>({
       query: () => ({
         url: apiRoutes.diets,
         method: "GET",
@@ -18,6 +19,7 @@ const dietAPI = apiSlice.injectEndpoints({
       providesTags: ["Diet"],
     }),
     createDiet: builder.mutation({
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       query: (data: any) => ({
         url: apiRoutes.diets,
         method: "POST",
@@ -25,6 +27,7 @@ const dietAPI = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["Diet"],
     }),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     updateDiet: builder.mutation<any, { data: any; id: string }>({
       query: ({ data, id }) => ({
         url: apiRoutes.dietByID(id),
@@ -57,6 +60,7 @@ const dietAPI = apiSlice.injectEndpoints({
       providesTags: ["DietReqLimit"],
     }),
     createDietRequestLimit: builder.mutation({
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       query: (data: any) => ({
         url: apiRoutes.dietReqLimits,
         method: "POST",
@@ -64,6 +68,7 @@ const dietAPI = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["DietReqLimit"],
     }),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     updateDietRequestLimit: builder.mutation<any, { data: any; id: string }>({
       query: ({ data, id }) => ({
         url: apiRoutes.dietReqLimitsByID(id),
