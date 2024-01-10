@@ -83,8 +83,27 @@ export interface IWorkoutFormProps {
 }
 
 ///DIET
+// diet lit data
 export interface IDietData {
   _id: string;
+  name: string;
+  quantity: number;
+  unit: string;
+  calorie: number;
+  date: Date;
+  entryBy: {
+    firstname: string;
+    lastname: string;
+  };
+}
+
+// diet form
+export interface IDietFormProps {
+  initialvalues?: Pick<IDietData, "name" | "quantity" | "unit" | "calorie">;
+  edit: boolean;
+  id?: string;
+}
+export interface IDietForm {
   name: string;
   quantity: number;
   unit: string;
