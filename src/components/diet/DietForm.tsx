@@ -62,7 +62,9 @@ const DietForm: FC<IDietFormProps> = ({ initialvalues, edit, id }) => {
   });
 
   const navigateDietList = async () => {
-    navigate("/diet");
+    setTimeout(() => {
+      navigate("/diet");
+    }, 1500);
   };
 
   return (
