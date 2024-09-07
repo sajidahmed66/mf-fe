@@ -32,10 +32,11 @@ import EditPackagePage from "@/pages/pakages/edit.page";
 import EditDietPage from "@/pages/diet/edit.pages";
 import EditWorkoutPage from "@/pages/workout/edit.pages";
 
+// todo need to re-write this to a more object-value pattren recomanded by react-router-dom official website
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
-      <Route path="/" element={<RootElement />}>
+      <Route path="/" element={<RootElement />} >
         <Route index loader={() => redirect("/dashboard")} />
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="trainer">
