@@ -13,7 +13,7 @@ import TraineeCreation from "@/pages/trainee/new.pages";
 import Traineedetails from "@/pages/trainee/details.pages";
 //
 import DietList from "@/pages/diet/list.pages";
-import DietCreate from "@/pages/diet/new.pages";
+import DietCreate from "@/pages/diet/add.pages";
 import DietPlanRequests from "@/pages/diet/requested-plan.pages";
 //
 import WorkoutList from "@/pages/workout/list.pages";
@@ -29,12 +29,14 @@ import RootElement from "@/components/layout/RootElement";
 import PackageListPage from "@/pages/pakages/list.page";
 import AddPackagePage from "@/pages/pakages/add.page";
 import EditPackagePage from "@/pages/pakages/edit.page";
+import EditDietPage from "@/pages/diet/edit.pages";
 import EditWorkoutPage from "@/pages/workout/edit.pages";
 
+// todo need to re-write this to a more object-value pattren recomanded by react-router-dom official website
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
-      <Route path="/" element={<RootElement />}>
+      <Route path="/" element={<RootElement />} >
         <Route index loader={() => redirect("/dashboard")} />
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="trainer">
@@ -51,6 +53,7 @@ const router = createBrowserRouter(
         <Route path="diet">
           <Route index element={<DietList />} />
           <Route path="create-diet" element={<DietCreate />} />
+          <Route path="edit/:id" element={<EditDietPage />} />
           <Route path="requested-plan" element={<DietPlanRequests />} />
           {/* todo add more if nessary */}
         </Route>
