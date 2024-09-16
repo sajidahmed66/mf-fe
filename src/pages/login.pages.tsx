@@ -11,7 +11,7 @@ const Login: React.FC = () => {
   //avigate
   useEffect(() => {
     if (authCheck) {
-      navigate("/");
+      navigate(-2);
     }
     setIsCheckingAuth(false);
   }, [authCheck, navigate]);
