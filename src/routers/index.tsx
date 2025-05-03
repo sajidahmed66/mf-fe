@@ -34,6 +34,9 @@ import EditWorkoutPage from "@/pages/workout/edit.pages";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
+      <Route path="/login">
+        <Route index element={<Login />} />
+      </Route>
       <Route path="/" element={<RootElement />}>
         <Route index loader={() => redirect("/dashboard")} />
         <Route path="dashboard" element={<Dashboard />} />
@@ -70,9 +73,6 @@ const router = createBrowserRouter(
           <Route path="add" element={<AddPackagePage />} />
           <Route path="edit/:id" element={<EditPackagePage />} />
         </Route>
-      </Route>
-      <Route path="/login">
-        <Route index element={<Login />} />
       </Route>
       <Route path="*" element={<NotFound />} />
     </Route>,

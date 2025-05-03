@@ -9,10 +9,7 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
-  "engines": {
-    "npm": "please-use-yarn",
-    "yarn": ">= 1.19.1"
-  },
+  
   "dependencies": {
     "@faker-js/faker": "^8.1.0",
     "@mantine/core": "^7.0.0",
